@@ -142,11 +142,11 @@ class _LoginPageState extends State<LoginPage> {
       Function() onPressed, String text, Color bgColor, Color fgColor) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
       style: ElevatedButton.styleFrom(
         backgroundColor: bgColor,
         foregroundColor: fgColor,
       ),
+      child: Text(text),
     );
   }
 
