@@ -31,8 +31,9 @@ class _RegisterPageState extends State<RegisterPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
-            Colors.red,
+            Colors.black,
+            Colors.grey,
+            Colors.black,
           ],
         )),
         child: Padding(
@@ -87,29 +88,36 @@ class _RegisterPageState extends State<RegisterPage> {
                       ));
                     }
                   }, "Kayıt", Colors.black, Colors.white),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Hesabınız Varsa"),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation,
+                                          secondaryAnimation) =>
                                       const LoginPage(),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                const begin = Offset(0.0, 1.0);
-                                const end = Offset.zero;
-                                final tween = Tween(begin: begin, end: end);
-                                final offsetAnimation = animation.drive(tween);
+                                  transitionsBuilder: (context, animation,
+                                      secondaryAnimation, child) {
+                                    const begin = Offset(0.0, 1.0);
+                                    const end = Offset.zero;
+                                    final tween = Tween(begin: begin, end: end);
+                                    final offsetAnimation =
+                                        animation.drive(tween);
 
-                                return SlideTransition(
-                                  position: offsetAnimation,
-                                  child: child,
-                                );
-                              },
-                            ));
-                      },
-                      child: const Text("Hesabınız Varsa Giriş Yap!"))
+                                    return SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    );
+                                  },
+                                ));
+                          },
+                          child: const Text("Giriş Yap!")),
+                    ],
+                  )
                 ],
               ),
             ),

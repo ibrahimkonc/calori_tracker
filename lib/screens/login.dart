@@ -31,8 +31,9 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
-            Colors.red,
+            Colors.black,
+            Colors.grey,
+            Colors.black,
           ],
         )),
         child: Padding(
@@ -92,29 +93,36 @@ class _LoginPageState extends State<LoginPage> {
                       ));
                     }
                   }, "Giriş", const Color.fromARGB(255, 4, 4, 4), Colors.white),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Hesabınız Yoksa"),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation,
+                                          secondaryAnimation) =>
                                       const RegisterPage(),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                const begin = Offset(0.0, 1.0);
-                                const end = Offset.zero;
-                                final tween = Tween(begin: begin, end: end);
-                                final offsetAnimation = animation.drive(tween);
+                                  transitionsBuilder: (context, animation,
+                                      secondaryAnimation, child) {
+                                    const begin = Offset(0.0, 1.0);
+                                    const end = Offset.zero;
+                                    final tween = Tween(begin: begin, end: end);
+                                    final offsetAnimation =
+                                        animation.drive(tween);
 
-                                return SlideTransition(
-                                  position: offsetAnimation,
-                                  child: child,
-                                );
-                              },
-                            ));
-                      },
-                      child: const Text("Hesabınız Yoksa Kayıt Ol!"))
+                                    return SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    );
+                                  },
+                                ));
+                          },
+                          child: const Text("Kayıt Ol!")),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -134,11 +142,11 @@ class _LoginPageState extends State<LoginPage> {
       Function() onPressed, String text, Color bgColor, Color fgColor) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
       style: ElevatedButton.styleFrom(
         backgroundColor: bgColor,
         foregroundColor: fgColor,
       ),
+      child: Text(text),
     );
   }
 
