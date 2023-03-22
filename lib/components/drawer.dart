@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../theme/theme.dart';
+import '../providers/theme_provider.dart';
 
 class MenuPrincipal extends StatelessWidget {
   const MenuPrincipal({super.key});

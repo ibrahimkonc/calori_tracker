@@ -1,6 +1,6 @@
 import 'package:calori_tracker/providers/system_provider.dart';
 import 'package:calori_tracker/screens/home.dart';
-import 'package:calori_tracker/theme/theme.dart';
+import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
