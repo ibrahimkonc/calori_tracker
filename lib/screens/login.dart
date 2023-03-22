@@ -31,9 +31,9 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.black,
             Colors.grey,
-            Colors.black,
+            Colors.white,
+            Colors.grey,
           ],
         )),
         child: Padding(

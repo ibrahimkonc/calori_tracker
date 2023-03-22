@@ -31,9 +31,9 @@ class _RegisterPageState extends State<RegisterPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.black,
             Colors.grey,
-            Colors.black,
+            Colors.white,
+            Colors.grey,
           ],
         )),
         child: Padding(
