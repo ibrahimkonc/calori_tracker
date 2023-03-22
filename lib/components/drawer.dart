@@ -55,7 +55,7 @@ class MenuPrincipal extends StatelessWidget {
                   activeColor: accentColor,
                   onChanged: (value) => appTheme.customTheme = value),
             ),
-          )
+          ),
         ],
       ),
     );
