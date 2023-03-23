@@ -9,6 +9,7 @@ class BottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Container(
+      color: Colors.black87,
       child: Stack(
         children: [
           CustomPaint(
