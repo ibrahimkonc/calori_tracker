@@ -1,6 +1,8 @@
 import 'package:calori_tracker/screens/home.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/login.dart';
+
 class SystemProvider with ChangeNotifier {
   int pageIndex = 1;
 
@@ -16,16 +18,7 @@ class SystemProvider with ChangeNotifier {
       ),
     ),
     const HomePage(),
-    Scaffold(
-      body: Container(
-        child: const Center(
-          child: Text(
-            "3",
-            style: TextStyle(color: Colors.white, fontSize: 40),
-          ),
-        ),
-      ),
-    ),
+    LoginPage()
   ];
   void route(int value) {
     pageIndex = value;
