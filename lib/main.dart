@@ -1,10 +1,10 @@
 import 'package:calori_tracker/providers/system_provider.dart';
-import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'components/bottom_navbar.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -27,12 +27,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final systemProvider = Provider.of<SystemProvider>(context);
 
-    return const MaterialApp(
+    return MaterialApp(
       //  theme: currentTheme,
       // debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: LoginPage(),
+      home: Scaffold(
+        body: systemProvider.pages[systemProvider.pageIndex],
+        bottomNavigationBar: BottomNavbar(
+          onTap: (int value) {
+            systemProvider.route(value);
+          },
+          pageIndex: systemProvider.pageIndex,
+        ),
+      ),
     );
   }
 }

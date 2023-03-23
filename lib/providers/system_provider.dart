@@ -1,4 +1,4 @@
-import 'package:calori_tracker/components/radial_progress.dart';
+import 'package:calori_tracker/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class SystemProvider with ChangeNotifier {
@@ -16,7 +16,7 @@ class SystemProvider with ChangeNotifier {
         ),
       ),
     ),
-    const Scaffold(body: RadialProgressPage()),
+    const HomePage(),
     Scaffold(
       body: Container(
         color: Colors.black87,
