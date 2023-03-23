@@ -2,7 +2,7 @@ import 'package:calori_tracker/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class SystemProvider with ChangeNotifier {
-  int pageIndex = 1;
+  int pageIndex = -1;
 
   List<Widget> pages = [
     Scaffold(

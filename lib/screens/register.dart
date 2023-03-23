@@ -91,7 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Hesabınız Varsa"),
+                      const Text("Hesabınız Varsa",
+                          style: TextStyle(color: Colors.black)),
                       TextButton(
                           onPressed: () {
                             Navigator.pushReplacement(
@@ -129,6 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _textfiled(TextEditingController controller, String label) =>
       TextField(
+        style: TextStyle(color: Colors.black),
         controller: controller,
         decoration: InputDecoration(labelText: label),
       );

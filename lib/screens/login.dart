@@ -1,7 +1,5 @@
 import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/screens/register.dart';
-import 'package:calori_tracker/screens/search_screen.dart';
-import 'package:calori_tracker/service/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                           await auth.signInWithEmailAndPassword(
                               email: usernameController.text,
                               password: passwordController.text);
-                      //print(credential);
+                      // print(credential.additionalUs);
 
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Row(
@@ -98,7 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Hesabınız Yoksa"),
+                      const Text("Hesabınız Yoksa",
+                          style: TextStyle(color: Colors.black)),
                       TextButton(
                           onPressed: () {
                             Navigator.pushReplacement(
@@ -136,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _textfiled(TextEditingController controller, String label) =>
       TextField(
+        style: TextStyle(color: Colors.black),
         controller: controller,
         decoration: InputDecoration(labelText: label),
       );
