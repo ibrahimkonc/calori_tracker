@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: Center(
               child: GridView(
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 // shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 // ignore: sort_child_properties_last
@@ -153,12 +153,12 @@ class HomePage extends StatelessWidget {
                     onPressedEye: () {},
                   )
                 ],
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 1.0,
                   crossAxisSpacing: 18,
                   mainAxisSpacing: 20,
-                  mainAxisExtent: 150,
+                  mainAxisExtent: MediaQuery.of(context).size.height * 0.16,
                 ),
               ),
             ),

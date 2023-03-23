@@ -13,6 +13,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('uid');
   String data = prefs.getString('uid') ?? "";
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentTheme = Provider.of<ThemeChanger>(context).currentTheme;
     final systemProvider = Provider.of<SystemProvider>(context);
-    if (data == null) {
+    if (data == "") {
       systemProvider.pageIndex = 0;
     }
     return MaterialApp(
