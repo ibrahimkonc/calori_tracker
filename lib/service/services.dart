@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../model/item_model.dart';
+const String realTimeDbBaseUrl =
+    "https://calori-tracker-c2f3e-default-rtdb.europe-west1.firebasedatabase.app/";
 
 const String _baseUrl = "https://api.calorieninjas.com/v1/nutrition?query=";
 
@@ -25,4 +28,8 @@ class Services {
     }
     return list;
   }
+
+
+
+
 }
