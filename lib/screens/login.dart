@@ -33,9 +33,9 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.black,
             Colors.grey,
-            Colors.black,
+            Colors.white,
+            Colors.grey,
           ],
         )),
         child: Padding(
@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
           color: colors,
           spreadRadius: 0,
           blurRadius: 0,
-          offset: const Offset(7, 7), // changes position of shadow
+          offset: const Offset(7, 7),
         ),
       ],
       borderRadius: const BorderRadius.only(
