@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(MyApp());
@@ -20,7 +21,18 @@ class MyHomePage extends StatefulWidget {
   SplashScreenState createState() => SplashScreenState();
 }
 
-class SplashScreenState extends State<MyHomePage> {
+class SplashScreenState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: Duration(seconds: 2))
+        ..repeat();
+
+  @override
+  dispose() {
+    _controller.dispose(); // you need this
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,8 +59,19 @@ class SplashScreenState extends State<MyHomePage> {
             SizedBox(
               height: 50,
             ),
-            Image.asset(
-              "assets/images/splashimage.png",
+            Center(
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (_, child) {
+                  return Transform.rotate(
+                    angle: _controller.value * 2 * math.pi,
+                    child: child,
+                  );
+                },
+                child: Image.asset(
+                  "assets/images/splashimage.png",
+                ),
+              ),
             ),
           ],
         ),
