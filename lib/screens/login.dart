@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, bottom: 10),
+                  padding: const EdgeInsets.only(top: 50.0, bottom: 15),
                   child: SizedBox(child: LottieBuilder.asset("assets/lottie/login_lottie.json"), width: 200, height: 200,),
                 ),
                 Container(
