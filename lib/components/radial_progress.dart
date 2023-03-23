@@ -1,4 +1,3 @@
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -96,7 +95,6 @@ class _RadialProgressState extends State<RadialProgress>
                 ),
                 Text(
                   "%${widget.porcentaje.toString().replaceAll(".0", "")}",
-                  style: const TextStyle(color: Colors.white),
                 )
               ],
             ),

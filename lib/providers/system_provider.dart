@@ -7,7 +7,6 @@ class SystemProvider with ChangeNotifier {
   List<Widget> pages = [
     Scaffold(
       body: Container(
-        color: Colors.black87,
         child: const Center(
           child: Text(
             "1",
@@ -19,7 +18,6 @@ class SystemProvider with ChangeNotifier {
     const HomePage(),
     Scaffold(
       body: Container(
-        color: Colors.black87,
         child: const Center(
           child: Text(
             "3",

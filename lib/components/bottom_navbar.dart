@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class BottomNavbar extends StatelessWidget {
   final int pageIndex;
@@ -7,40 +10,45 @@ class BottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context);
+
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.black87,
-      child: Stack(
-        children: [
-          CustomPaint(
-            size: Size(size.width, 80),
-            painter: BNBCustomePainter(),
+    return Stack(
+      children: [
+        CustomPaint(
+          size: Size(size.width, 80),
+          painter: BNBCustomePainter(),
+        ),
+        Center(
+          heightFactor: 0.6,
+          child: FloatingActionButton(
+            onPressed: () => onTap(1),
+            backgroundColor: appTheme.themeColor,
+            child: Icon(Icons.home),
+            elevation: 0.1,
           ),
-          Center(
-            heightFactor: 0.6,
-            child: FloatingActionButton(
-              onPressed: () => onTap(1),
-              backgroundColor: Colors.orange,
-              child: Icon(Icons.home),
-              elevation: 0.1,
-            ),
+        ),
+        SizedBox(
+          width: size.width,
+          height: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  onPressed: () => onTap(0),
+                  icon: Icon(Icons.add),
+                  color: Colors.black87),
+              Container(
+                width: size.width * .20,
+              ),
+              IconButton(
+                  onPressed: () => onTap(2),
+                  icon: Icon(Icons.person),
+                  color: Colors.black87),
+            ],
           ),
-          SizedBox(
-            width: size.width,
-            height: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(onPressed: () => onTap(0), icon: Icon(Icons.add)),
-                Container(
-                  width: size.width * .20,
-                ),
-                IconButton(onPressed: () => onTap(2), icon: Icon(Icons.person)),
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
