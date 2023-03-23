@@ -48,16 +48,17 @@ class SplashScreenState extends State<MyHomePage>
         body: Container(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.only(right: 40, bottom: 40, left: 40),
+        padding: const EdgeInsets.only(right: 55, bottom: 55, left: 55),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "Calori Tracker",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25, fontWeight: FontWeight.bold, color: Colors.red),
             ),
             SizedBox(
-              height: 50,
+              height: 70,
             ),
             Center(
               child: AnimatedBuilder(
