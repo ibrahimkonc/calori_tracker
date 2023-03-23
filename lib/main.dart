@@ -1,5 +1,5 @@
+import 'package:calori_tracker/providers/search_provider.dart';
 import 'package:calori_tracker/providers/system_provider.dart';
-import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +16,7 @@ void main() async {
     providers: [
       ListenableProvider(create: (_) => SystemProvider()),
       ListenableProvider(create: (_) => ThemeChanger(4)),
+      ChangeNotifierProvider(create: (_) => SearchProvider()),
     ],
     child: const MyApp(),
   ));
