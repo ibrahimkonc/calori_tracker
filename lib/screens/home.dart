@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                     Column(
                       children: [
                         const RadialProgress(
-                          porcentaje: 30,
+                          porcentaje: 80,
                           colorPrimario: Colors.green,
                           colorSecundario: Colors.white,
                           height: 150,
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                         Row(
                           children: const [
                             RadialProgress(
-                              porcentaje: 60,
+                              porcentaje: 10,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Protein",
