@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ThemeChanger with ChangeNotifier {
   bool _darkTheme = false;
   bool _customTheme = false;
+  Color themeColor = Colors.pink;
 
   ThemeData _currentTheme = ThemeData.light();
 
@@ -12,16 +13,14 @@ class ThemeChanger with ChangeNotifier {
         _darkTheme = false;
         _customTheme = false;
         _currentTheme = ThemeData.light().copyWith(
-          colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
         );
         break;
       case 2:
         _darkTheme = true;
         _customTheme = false;
         _currentTheme = ThemeData.dark().copyWith(
-          colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
         );
         break;
       case 3:
@@ -37,11 +36,10 @@ class ThemeChanger with ChangeNotifier {
         );
         break;
       default:
-        _darkTheme = false;
+        _darkTheme = true;
         _customTheme = false;
-        _currentTheme = ThemeData.light().copyWith(
-          colorScheme:
-              ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+        _currentTheme = ThemeData.dark().copyWith(
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
         );
     }
   }
@@ -55,11 +53,11 @@ class ThemeChanger with ChangeNotifier {
     _darkTheme = valor;
     if (valor) {
       _currentTheme = ThemeData.dark().copyWith(
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
       );
     } else {
       _currentTheme = ThemeData.light().copyWith(
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.pink),
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: themeColor),
       );
     }
     notifyListeners();
