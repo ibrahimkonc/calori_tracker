@@ -22,7 +22,7 @@ class BottomNavbar extends StatelessWidget {
         Center(
           heightFactor: 0.6,
           child: FloatingActionButton(
-            onPressed: () => onTap(1),
+            onPressed: () => onTap(2),
             backgroundColor: appTheme.themeColor,
             child: Icon(Icons.home),
             elevation: 0.1,
@@ -35,14 +35,14 @@ class BottomNavbar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                  onPressed: () => onTap(0),
+                  onPressed: () => onTap(1),
                   icon: Icon(Icons.add),
                   color: Colors.black87),
               Container(
                 width: size.width * .20,
               ),
               IconButton(
-                  onPressed: () => onTap(2),
+                  onPressed: () => onTap(3),
                   icon: Icon(Icons.person),
                   color: Colors.black87),
             ],

@@ -5,6 +5,7 @@ import 'dart:convert';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class Items {
+  String? userID;
   String? name;
   double? calories;
   double? serving_size_g;
@@ -18,6 +19,7 @@ class Items {
   double? fiber_g;
   double? sugar_g;
   Items({
+    this.userID,
     this.name,
     this.calories,
     this.serving_size_g,
@@ -33,6 +35,7 @@ class Items {
   });
 
   Items copyWith({
+    String? userID,
     String? name,
     double? calories,
     double? serving_size_g,
@@ -47,6 +50,7 @@ class Items {
     double? sugar_g,
   }) {
     return Items(
+      userID: userID ?? this.userID,
       name: name ?? this.name,
       calories: calories ?? this.calories,
       serving_size_g: serving_size_g ?? this.serving_size_g,
@@ -65,6 +69,7 @@ class Items {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'userID': userID,
       'name': name,
       'calories': calories,
       'serving_size_g': serving_size_g,
@@ -82,6 +87,7 @@ class Items {
 
   factory Items.fromMap(Map<String, dynamic> map) {
     return Items(
+      userID: map['userID'] != null ? map['userID'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       calories: map['calories'] != null ? map['calories'] as double : null,
       serving_size_g: map['serving_size_g'] != null
@@ -113,14 +119,15 @@ class Items {
 
   @override
   String toString() {
-    return 'Items(name: $name, calories: $calories, serving_size_g: $serving_size_g, fat_total_g: $fat_total_g, fat_saturated_g: $fat_saturated_g, protein_g: $protein_g, sodium_mg: $sodium_mg, potassium_mg: $potassium_mg, cholesterol_mg: $cholesterol_mg, carbohydrates_total_g: $carbohydrates_total_g, fiber_g: $fiber_g, sugar_g: $sugar_g)';
+    return 'Items(userID: $userID, name: $name, calories: $calories, serving_size_g: $serving_size_g, fat_total_g: $fat_total_g, fat_saturated_g: $fat_saturated_g, protein_g: $protein_g, sodium_mg: $sodium_mg, potassium_mg: $potassium_mg, cholesterol_mg: $cholesterol_mg, carbohydrates_total_g: $carbohydrates_total_g, fiber_g: $fiber_g, sugar_g: $sugar_g)';
   }
 
   @override
   bool operator ==(covariant Items other) {
     if (identical(this, other)) return true;
 
-    return other.name == name &&
+    return other.userID == userID &&
+        other.name == name &&
         other.calories == calories &&
         other.serving_size_g == serving_size_g &&
         other.fat_total_g == fat_total_g &&
@@ -136,7 +143,8 @@ class Items {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return userID.hashCode ^
+        name.hashCode ^
         calories.hashCode ^
         serving_size_g.hashCode ^
         fat_total_g.hashCode ^

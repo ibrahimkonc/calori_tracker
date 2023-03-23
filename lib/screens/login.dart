@@ -2,6 +2,9 @@ import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/screens/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/system_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final system = Provider.of<SystemProvider>(context);
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -65,7 +70,8 @@ class _LoginPageState extends State<LoginPage> {
                           await auth.signInWithEmailAndPassword(
                               email: usernameController.text,
                               password: passwordController.text);
-                      // print(credential.additionalUs);
+                        //normal
+                      system.sessionChange(credential.user!.uid);
 
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Row(
@@ -172,3 +178,5 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+class Navigation {}

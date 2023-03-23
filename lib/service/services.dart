@@ -29,4 +29,16 @@ class Services {
     }
     return list;
   }
+
+  Future<Items?> postUser(Items data) async {
+    http.Response response = await http.post(getUrl("users"),
+        body: data.toJson(), headers: {"Content-Type": "application/json"});
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      // data.userID = data["name"];
+      return data;
+    } else {
+      return null;
+    }
+  }
 }
