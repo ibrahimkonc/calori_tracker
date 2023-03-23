@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../providers/daily_my_foods.dart';
 import '../providers/search_provider.dart';
+import '../providers/theme_provider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  final String title;
+  const SearchScreen({super.key, required this.title});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -16,13 +18,14 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final searchProvider = Provider.of<SearchProvider>(context);
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.grey,
-          title: const Text("Breakfast"),
+          backgroundColor: appTheme.colorScheme.secondary,
+          title: Text(widget.title),
         ),
         body: Column(
           children: [

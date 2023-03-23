@@ -1,3 +1,4 @@
+import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/screens/register.dart';
 import 'package:calori_tracker/screens/search_screen.dart';
 import 'package:calori_tracker/service/services.dart';
@@ -25,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SearchScreen()));
+                              builder: (context) => const HomePage()));
                     } catch (e) {
                       print(e.toString());
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
