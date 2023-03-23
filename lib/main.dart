@@ -3,6 +3,7 @@ import 'package:calori_tracker/screens/add.dart';
 import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
+import 'package:calori_tracker/screens/profile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const AddPage(),
+      home: const ProfilePage(),
     );
   }
 }
