@@ -1,4 +1,5 @@
 import 'package:calori_tracker/providers/system_provider.dart';
+import 'package:calori_tracker/screens/add.dart';
 import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const LoginPage(),
+      home: const AddPage(),
     );
   }
 }
