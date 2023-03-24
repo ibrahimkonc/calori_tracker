@@ -13,6 +13,13 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<NewsProvider>(context, listen: false).getNews();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var newsProvider = Provider.of<NewsProvider>(context);
     Services services = Services();
