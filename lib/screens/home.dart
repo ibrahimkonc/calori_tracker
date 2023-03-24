@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
     final homeProvider = Provider.of<HomeProvider>(context);
-    homeProvider.getProgressData();
+    // homeProvider.getProgressData();
 
     return Scaffold(
       appBar: AppBar(
@@ -112,6 +112,12 @@ class HomePage extends StatelessWidget {
                                 .toString(),
                           ),
                         ),
+                        IconButton(
+                          icon: Icon(Icons.refresh),
+                          onPressed: () {
+                            homeProvider.getProgressData();
+                          },
+                        )
                       ],
                     ),
                   ],
