@@ -21,13 +21,13 @@ class SliverProfilePage extends StatelessWidget {
 
 class _MainScroll extends StatelessWidget {
   final items = [
-    const _ListItem('Age', Color.fromARGB(255, 43, 33, 114)),
-    const _ListItem('Height', Color.fromARGB(255, 113, 12, 176)),
-    const _ListItem('Weight', Color.fromARGB(255, 169, 4, 155)),
-    const _ListItem('Calories', Color.fromARGB(255, 5, 130, 47)),
-    const _ListItem('Protein', Color.fromARGB(220, 189, 12, 12)),
-    const _ListItem('Carbs', Color.fromARGB(255, 201, 130, 50)),
-    const _ListItem('Fat', Color.fromARGB(255, 243, 165, 3)),
+    const _ListItem('Age', Colors.white),
+    const _ListItem('Height', Colors.white),
+    const _ListItem('Weight', Colors.white),
+    const _ListItem('Calories', Colors.white),
+    const _ListItem('Protein', Colors.white),
+    const _ListItem('Carbs', Colors.white),
+    const _ListItem('Fat', Colors.white),
   ];
 
   @override
@@ -126,16 +126,16 @@ class _Titulo extends StatelessWidget {
               bottom: 8,
               child: Container(
                 height: 8,
-                width: 100,
+                width: 150,
                 color: (appTheme.darkTheme)
-                    ? Colors.grey
+                    ? Color.fromARGB(255, 240, 240, 240)
                     : const Color(0xfff7cdd5),
               ),
             ),
             const Text(
               'Profile',
               style: TextStyle(
-                  color: Color(0xffd93a30),
+                  color: Colors.pink,
                   fontSize: 50,
                   fontWeight: FontWeight.bold),
             ),
