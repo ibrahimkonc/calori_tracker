@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
                 // ignore: sort_child_properties_last
                 children: [
                   CategoryCard(
-                    title: "Brakfast",
+                    title: "Breakfast",
                     icon: Icons.coffee_outlined,
                     onPressedAdd: () {
                       Navigator.push(
