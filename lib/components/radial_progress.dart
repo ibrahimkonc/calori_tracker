@@ -1,9 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final double porcentaje;
+  final String porcentajeText;
   // final Color? colorPrimario;
   final Color colorPrimario;
   final Color colorSecundario;
@@ -19,6 +19,7 @@ class RadialProgress extends StatefulWidget {
   const RadialProgress({
     super.key,
     required this.porcentaje,
+    required this.porcentajeText,
     // this.colorPrimario,
     this.colorPrimario = Colors.blue,
     this.colorSecundario = Colors.grey,
@@ -48,7 +49,7 @@ class _RadialProgressState extends State<RadialProgress>
     porcentajeAnterior = widget.porcentaje;
 
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+        vsync: this, duration: const Duration(milliseconds: 1000));
   }
 
   @override
@@ -69,31 +70,42 @@ class _RadialProgressState extends State<RadialProgress>
       builder: (BuildContext context, Widget? child) {
         return Column(
           children: [
-            SizedBox(
-              height: widget.height,
-              width: widget.width,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: double.infinity,
-                height: double.infinity,
-                child: CustomPaint(
-                  painter: _MiRadialProgress(
-                    (widget.porcentaje - diferenciaAnimar) +
-                        (diferenciaAnimar * controller.value),
-                    widget.colorPrimario,
-                    widget.colorSecundario,
-                    widget.grosorPrimario,
-                    widget.grosorSecundario,
-                    widget.tipoBordes,
-                    widget.gradiente,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: widget.height,
+                  width: widget.width,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: CustomPaint(
+                      painter: _MiRadialProgress(
+                        (widget.porcentaje - diferenciaAnimar) +
+                            (diferenciaAnimar * controller.value),
+                        widget.colorPrimario,
+                        widget.colorSecundario,
+                        widget.grosorPrimario,
+                        widget.grosorSecundario,
+                        widget.tipoBordes,
+                        widget.gradiente,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                Text(
+                  widget.porcentajeText.toString(),
+                )
+              ],
             ),
-            Text(
-              widget.text,
-              style: TextStyle(color: widget.textColor),
+            Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: Text(
+                widget.text,
+                style: TextStyle(color: widget.textColor),
+              ),
             )
           ],
         );
