@@ -1,6 +1,7 @@
 import 'package:calori_tracker/service/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/animation.dart';
 import '../providers/news_provider.dart';
 import '../providers/theme_provider.dart';
 
@@ -143,6 +144,7 @@ class _NewsScreenState extends State<NewsScreen> {
               : Center(
                   child: Column(
                     children: [
+                      const DumenPage(),
                       const SizedBox(
                         height: 100,
                       ),
