@@ -117,12 +117,16 @@ class HomePage extends StatelessWidget {
                       dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(1);
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return const AlertDialog(
-                              title: Text('Breakfast List'),
-                              content: SetupAlertDialoadContainer(),
+                              //title: Text('Breakfast List'),
+                              content: SetupAlertDialoadContainer(
+                                  title: "Breakfast List"),
                             );
                           });
                     },
@@ -140,7 +144,20 @@ class HomePage extends StatelessWidget {
                                   )));
                       dailyFoodProvider.isActive = false;
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(2);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Lunch"),
+                            );
+                          });
+                    },
                   ),
                   CategoryCard(
                     title: "Dinner",
@@ -155,7 +172,20 @@ class HomePage extends StatelessWidget {
                                   )));
                       dailyFoodProvider.isActive = false;
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(3);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Diner"),
+                            );
+                          });
+                    },
                   ),
                   CategoryCard(
                     title: "Snacks",
@@ -170,7 +200,20 @@ class HomePage extends StatelessWidget {
                                   )));
                       dailyFoodProvider.isActive = false;
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(4);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Snacks"),
+                            );
+                          });
+                    },
                   )
                 ],
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
