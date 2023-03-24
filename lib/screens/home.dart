@@ -52,8 +52,9 @@ class _HomePageState extends State<HomePage> {
                       grosorPrimario: 20,
                       grosorSecundario: 21,
                       tipoBordes: StrokeCap.round,
-                      porcentaje:
-                          homeProvider.calories / homeProvider.dailyLimit,
+                      porcentaje: homeProvider.calories /
+                          homeProvider.caloriesLimit *
+                          100,
                       colorPrimario: Colors.green,
                       colorSecundario: Colors.white,
                       height: 150,
@@ -74,7 +75,8 @@ class _HomePageState extends State<HomePage> {
                               grosorPrimario: 8,
                               grosorSecundario: 11,
                               porcentaje: homeProvider.proteinG /
-                                  homeProvider.dailyLimit,
+                                  homeProvider.proteinLimit *
+                                  100,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Protein",
@@ -91,7 +93,8 @@ class _HomePageState extends State<HomePage> {
                               grosorSecundario: 8,
                               tipoBordes: StrokeCap.round,
                               porcentaje: homeProvider.carbohydratesTotalG /
-                                  homeProvider.dailyLimit,
+                                  homeProvider.carbLimit *
+                                  100,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Carbs",
@@ -110,7 +113,8 @@ class _HomePageState extends State<HomePage> {
                             grosorSecundario: 12,
                             tipoBordes: StrokeCap.round,
                             porcentaje: homeProvider.fatTotalG /
-                                homeProvider.dailyLimit,
+                                homeProvider.fatLimit *
+                                100,
                             colorPrimario: Colors.red,
                             colorSecundario: Colors.white,
                             text: "Fat",

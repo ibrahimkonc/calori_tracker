@@ -12,6 +12,10 @@ class HomeProvider extends ChangeNotifier {
   bool isLoading = false;
   int dailyLimit =
       50; // Günlük Limit 5000 olarak ayarlanmıştır (dailyLimit/value)
+  double fatLimit = 100;
+  double carbLimit = 310;
+  double proteinLimit = 100;
+  double caloriesLimit = 2000;
 
   Services service = Services();
   List<Items> list = [];

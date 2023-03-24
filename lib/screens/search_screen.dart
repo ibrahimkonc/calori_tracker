@@ -36,7 +36,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: TextField(
                   textAlignVertical: TextAlignVertical.center,
                   textAlign: TextAlign.left,
-                  onSubmitted: (value) {
+                  // onSubmitted: (value) {
+                  //   dailyFoodProvider.getSearch(value);
+                  // },
+                  onChanged: (value) {
                     dailyFoodProvider.getSearch(value);
                   },
                   decoration: InputDecoration(
