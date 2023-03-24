@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:calori_tracker/components/radial_progress.dart';
 import '../components/drawer.dart';
+import '../components/history_alertdialog.dart';
 import '../providers/theme_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -108,10 +109,19 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
-                                    title: 'Brakfast',
+                                    title: 'Breakfast',
                                   )));
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Breakfast List'),
+                              content: SetupAlertDialoadContainer(),
+                            );
+                          });
+                    },
                   ),
                   CategoryCard(
                     title: "Lunch",
