@@ -3,20 +3,13 @@ import 'package:calori_tracker/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/news_screen.dart';
+
 class SystemProvider with ChangeNotifier {
   int pageIndex = 2;
 
   List<Widget> pages = [
-    Scaffold(
-      body: Container(
-        child: const Center(
-          child: Text(
-            "1",
-            style: TextStyle(color: Colors.white, fontSize: 40),
-          ),
-        ),
-      ),
-    ),
+    const NewsScreen(),
     const HomePage(),
     const SliverProfilePage(),
   ];
