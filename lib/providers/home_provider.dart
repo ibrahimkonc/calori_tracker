@@ -10,6 +10,7 @@ class HomeProvider extends ChangeNotifier {
   double carbohydratesTotalG = 0;
   double c = 0, p = 0, f = 0, carb = 0;
   bool isLoading = false;
+  
   int dailyLimit =
       50; // Günlük Limit 5000 olarak ayarlanmıştır (dailyLimit/value)
   double fatLimit = 100;

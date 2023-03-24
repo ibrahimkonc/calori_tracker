@@ -56,25 +56,14 @@ class _MainScroll extends StatelessWidget {
                 'Weight : ' + systemProvider.user.weight!.toStringAsFixed(0),
                 myPrimaryColor,
                 Icons.line_weight),
+            _ListItem('Calories : ' + homeProvider.calories!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
+            _ListItem('Protein : ' + homeProvider.proteinG!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
+            _ListItem('Carbs :' + homeProvider.fatTotalG!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
             _ListItem(
-                'Calories : ' +
-                    homeProvider.homeProcress.calories!.toStringAsFixed(2),
-                myPrimaryColor,
-                Icons.local_restaurant_outlined),
-            _ListItem(
-                'Protein : ' +
-                    homeProvider.homeProcress.protein_g!.toStringAsFixed(2),
-                myPrimaryColor,
-                Icons.local_restaurant_outlined),
-            _ListItem(
-                'Carbs :' +
-                    homeProvider.homeProcress.carbohydrates_total_g!
-                        .toStringAsFixed(2),
-                myPrimaryColor,
-                Icons.local_restaurant_outlined),
-            _ListItem(
-                'Fat : ' +
-                    homeProvider.homeProcress.fat_total_g!.toStringAsFixed(2),
+                'Fat : ' + homeProvider.carbohydratesTotalG!.toStringAsFixed(2),
                 myPrimaryColor,
                 Icons.local_restaurant_outlined),
           ]),
