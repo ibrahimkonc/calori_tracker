@@ -42,7 +42,6 @@ class _MainScroll extends StatelessWidget {
           floating: true,
           elevation: 0,
           backgroundColor: Colors.pink,
-          centerTitle: true,
           title: Text('Calorie Tricker'),
         ),
         SliverPersistentHeader(
