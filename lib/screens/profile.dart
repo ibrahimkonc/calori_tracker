@@ -125,11 +125,11 @@ class _Titulo extends StatelessWidget {
             Positioned(
               bottom: 8,
               child: Container(
-                height: 8,
-                width: 100,
+                height: 7,
+                width: 170,
                 color: (appTheme.darkTheme)
-                    ? Colors.grey
-                    : const Color(0xfff7cdd5),
+                    ? Color.fromARGB(255, 7, 59, 164)
+                    : Color.fromARGB(255, 10, 10, 144),
               ),
             ),
             const Text(
