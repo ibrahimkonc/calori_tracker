@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../providers/search_provider.dart';
-
 class SetupAlertDialoadContainer extends StatefulWidget {
   const SetupAlertDialoadContainer({super.key});
 

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:calori_tracker/components/radial_progress.dart';
 import '../components/drawer.dart';
 import '../components/history_alertdialog.dart';
+import '../providers/daily_my_foods.dart';
 import '../providers/theme_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -112,6 +114,7 @@ class HomePage extends StatelessWidget {
                                     title: 'Breakfast',
                                     category: 1,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
                       showDialog(
@@ -135,20 +138,22 @@ class HomePage extends StatelessWidget {
                                     title: 'Lunch',
                                     category: 2,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {},
                   ),
                   CategoryCard(
-                    title: "Diner",
+                    title: "Dinner",
                     icon: Icons.dinner_dining,
                     onPressedAdd: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
-                                    title: 'Diner',
+                                    title: 'Dinner',
                                     category: 3,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {},
                   ),
@@ -163,6 +168,7 @@ class HomePage extends StatelessWidget {
                                     title: 'Snacks',
                                     category: 4,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {},
                   )

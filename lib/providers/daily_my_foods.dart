@@ -5,18 +5,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DailyMyFoods extends ChangeNotifier {
   List<Items?> _dailyMyFoods = [];
-  Items nullData = Items();
   List<Items?> get dailyMyFoods => _dailyMyFoods;
   var services = Services();
+  bool isActive = false;
+  int category = 0;
+
+  final TextEditingController searchController = TextEditingController();
+  List<Items> searchList = [];
+  Services service = Services();
+
+  void getSearch(String query) async {
+    print("object");
+    searchList = await service.getSearch(query);
+    notifyListeners();
+  }
 
   void getDailyMyFoods(int category) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userID = prefs.getString('uid') ?? "";
-    if (userID != "" && category != "") {
-      _dailyMyFoods =
-          (await services.getFoodById(userID, category) ?? []) as List<Items?>;
+    if (isActive == false) {
+      searchList.clear();
+      print("lala");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userID = prefs.getString('uid') ?? "";
+      if (userID != "" && category != "") {
+        _dailyMyFoods = (await services.getFoodById(userID, category) ?? [])
+            as List<Items?>;
+      }
+      isActive = true;
+      notifyListeners();
     }
-    notifyListeners();
   }
 
   Future<bool> addFood(Items food, int category) async {
@@ -25,6 +41,8 @@ class DailyMyFoods extends ChangeNotifier {
     if (userID != "") {
       String response = await services.addFoodPost(food, userID, category);
       if (response != "") {
+        getDailyMyFoods(category);
+        isActive = false;
         notifyListeners();
         return true;
       } else {
@@ -40,8 +58,9 @@ class DailyMyFoods extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userID = prefs.getString('uid') ?? "";
     if (userID != "") {
-      String response = await services.addFoodPost(food, userID, category);
-      if (response != "") {
+      bool response = await services.deleteFood(userID, category, food.foodID!);
+      if (response) {
+        _dailyMyFoods.remove(food);
         notifyListeners();
         return true;
       } else {
