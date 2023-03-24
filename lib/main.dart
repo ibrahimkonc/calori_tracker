@@ -6,6 +6,7 @@ import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/bottom_navbar.dart';
@@ -14,8 +15,11 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+
   //await prefs.remove('uid');
   String data = prefs.getString('uid') ?? "";
+  await Future.delayed(const Duration(seconds: 5));
+  FlutterNativeSplash.remove();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MultiProvider(
@@ -28,8 +32,15 @@ void main() async {
     ],
     child: MyApp(data: data),
   ));
+}
 
-  WidgetsFlutterBinding.ensureInitialized();
+Future initialization(BuildContext? context) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? uid = prefs.getString('uid');
+  await Future.delayed(const Duration(seconds: 3));
+  if (uid != null) {
+    await prefs.setString('uid', uid);
+  }
 }
 
 class MyApp extends StatelessWidget {

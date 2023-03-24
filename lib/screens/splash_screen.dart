@@ -1,30 +1,33 @@
 import 'dart:async';
+import 'package:calori_tracker/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: MyHomePage(),
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }
 
-class MyHomePage extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   SplashScreenState createState() => SplashScreenState();
 }
 
-class SplashScreenState extends State<MyHomePage>
+class SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: Duration(seconds: 2))
+      AnimationController(vsync: this, duration: const Duration(seconds: 2))
         ..repeat();
 
   @override
@@ -37,9 +40,9 @@ class SplashScreenState extends State<MyHomePage>
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen())));
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const HomePage())));
   }
 
   @override
@@ -52,12 +55,12 @@ class SplashScreenState extends State<MyHomePage>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Calori Tracker",
               style: TextStyle(
                   fontSize: 25, fontWeight: FontWeight.bold, color: Colors.red),
             ),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             Center(
@@ -81,14 +84,14 @@ class SplashScreenState extends State<MyHomePage>
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Splash Screen Example")),
-      body: Center(
-          child: Text("Welcome to Home Page",
-              style: TextStyle(color: Colors.black, fontSize: 30))),
-    );
-  }
-}
+// class HomeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text("Splash Screen Example")),
+//       body: Center(
+//           child: Text("Welcome to Home Page",
+//               style: TextStyle(color: Colors.black, fontSize: 30))),
+//     );
+//   }
+// }
