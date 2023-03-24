@@ -1,6 +1,7 @@
+import 'package:calori_tracker/providers/system_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../providers/home_provider.dart';
 import '../providers/theme_provider.dart';
 
 class SliverProfilePage extends StatelessWidget {
@@ -9,6 +10,7 @@ class SliverProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
         body: SafeArea(
       child: Stack(
@@ -21,21 +23,12 @@ class SliverProfilePage extends StatelessWidget {
 }
 
 class _MainScroll extends StatelessWidget {
-  final items = [
-    const _ListItem('Age', myPrimaryColor, Icons.numbers),
-    const _ListItem('Height', myPrimaryColor, Icons.height),
-    const _ListItem('Weight', myPrimaryColor, Icons.line_weight),
-    const _ListItem(
-        'Calories', myPrimaryColor, Icons.local_restaurant_outlined),
-    const _ListItem('Protein', myPrimaryColor, Icons.local_restaurant_outlined),
-    const _ListItem('Carbs', myPrimaryColor, Icons.local_restaurant_outlined),
-    const _ListItem('Fat', myPrimaryColor, Icons.local_restaurant_outlined),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
-
+    final systemProvider = Provider.of<SystemProvider>(context);
+    final homeProvider = Provider.of<HomeProvider>(context);
+    systemProvider.getProfileData();
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
@@ -53,10 +46,26 @@ class _MainScroll extends StatelessWidget {
         ),
         SliverList(
           delegate: SliverChildListDelegate([
-            ...items,
-            const SizedBox(
-              height: 100,
-            )
+            _ListItem("Age : " + systemProvider.user.age.toString(),
+                myPrimaryColor, Icons.numbers),
+            _ListItem(
+                "Height : " + systemProvider.user.height!.toStringAsFixed(0),
+                myPrimaryColor,
+                Icons.height),
+            _ListItem(
+                'Weight : ' + systemProvider.user.weight!.toStringAsFixed(0),
+                myPrimaryColor,
+                Icons.line_weight),
+            _ListItem('Calories : ' + homeProvider.calories!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
+            _ListItem('Protein : ' + homeProvider.proteinG!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
+            _ListItem('Carbs :' + homeProvider.fatTotalG!.toStringAsFixed(2),
+                myPrimaryColor, Icons.local_restaurant_outlined),
+            _ListItem(
+                'Fat : ' + homeProvider.carbohydratesTotalG!.toStringAsFixed(2),
+                myPrimaryColor,
+                Icons.local_restaurant_outlined),
           ]),
         )
       ],
@@ -98,14 +107,14 @@ class _Titulo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context);
-
+    final systemProvider = Provider.of<SystemProvider>(context);
     return Column(
       children: [
         const SizedBox(height: 20),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(
-            'User X ',
+            systemProvider.user.name.toString(),
             style: TextStyle(
                 color: (appTheme.darkTheme)
                     ? Colors.white

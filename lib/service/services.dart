@@ -124,4 +124,21 @@ class Services {
       return "";
     }
   }
+
+  Future<User?> getUserProfile(String userID) async {
+    User user = User();
+    http.Response response = await http.get(getUrl("foods/$userID/0"));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      if (data != null) {
+        for (var key in data.keys) {
+          user = User.fromMap(data[key]);
+        }
+        return user;
+      }
+      return user;
+    } else {
+      return user;
+    }
+  }
 }

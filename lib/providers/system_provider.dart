@@ -9,7 +9,7 @@ import '../screens/news_screen.dart';
 
 class SystemProvider with ChangeNotifier {
   int pageIndex = 2;
-  User user = User();
+  User user = User(email: "", name: "", age: 0, weight: 0, height: 0);
   TextEditingController usernameController =
       TextEditingController(text: "admin@gmail.com");
   TextEditingController passwordController =
@@ -18,7 +18,6 @@ class SystemProvider with ChangeNotifier {
   TextEditingController ageController = TextEditingController();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
-
   Services service = Services();
 
   List<Widget> pages = [
@@ -37,6 +36,13 @@ class SystemProvider with ChangeNotifier {
     await prefs.setString('uid', id);
     pageIndex = 2;
     route(0);
+    notifyListeners();
+  }
+
+  void sessionExed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('uid');
+    notifyListeners();
   }
 
   void userRegisterPost(String userID) async {
@@ -47,6 +53,16 @@ class SystemProvider with ChangeNotifier {
       user.height = double.parse(ageController.text);
       user.weight = double.parse(weightController.text);
       service.userRegisterPost(user, userID);
+      notifyListeners();
+    }
+  }
+
+  void getProfileData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userID = prefs.getString('uid') ?? "";
+    if (userID != "") {
+      user = (await service.getUserProfile(userID))!;
+      notifyListeners();
     }
   }
 }
