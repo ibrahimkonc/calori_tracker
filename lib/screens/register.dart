@@ -14,8 +14,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController usernameController;
   late TextEditingController passwordController;
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
+  late TextEditingController first_lastNameController;
   late TextEditingController ageController;
   late TextEditingController heightController;
   late TextEditingController weightController;
@@ -26,8 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     usernameController = TextEditingController(text: "admin@gmail.com");
     passwordController = TextEditingController(text: "123567890");
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+    first_lastNameController = TextEditingController();
     ageController = TextEditingController();
     heightController = TextEditingController();
     weightController = TextEditingController();
@@ -36,6 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -67,95 +66,103 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.all(10),
                   height: 450,
                   child: Expanded(
-                    child: ListView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        const Text(
+                          "Kayıt Ol",
+                          style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                        const SizedBox(height: 20),
+                        _textfiled(usernameController, "Email"),
+                        _textfiled(passwordController, "Password"),
+                        _textfiled(
+                            first_lastNameController, "First and Last Name"),
+                        Row(
                           children: [
-                            const Text(
-                              "Kayıt Ol",
-                              style: TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                            Expanded(
+                                flex: 1,
+                                child: _textfiled(ageController, "Age")),
+                            SizedBox(
+                              width: 10,
                             ),
-                            const SizedBox(height: 20),
-                            _textfiled(usernameController, "Email"),
-                            _textfiled(passwordController, "Password"),
-                            _textfiled(firstNameController, "First Name"),
-                            _textfiled(lastNameController, "Last Name"),
-                            _textfiled(ageController, "Age"),
-                            _textfiled(heightController, "Height"),
-                            _textfiled(ageController, "Weight"),
-                            const SizedBox(height: 20),
-                            _button(() async {
-                              FirebaseAuth auth = FirebaseAuth.instance;
-                              try {
-                                UserCredential credential =
-                                    await auth.createUserWithEmailAndPassword(
-                                        email: usernameController.text,
-                                        password: passwordController.text);
-                                //print(credential);
-
-                                Navigator.pop(context);
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Row(
-                                    children: const [
-                                      Icon(Icons.check, color: Colors.white),
-                                      Text(' Kullanıcı kayıt edildi.'),
-                                    ],
-                                  ),
-                                ));
-                              } catch (e) {
-                                print(e.toString());
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(
-                                  content: Row(
-                                    children: const [
-                                      Icon(Icons.error, color: Colors.white),
-                                      Text(" Hata !!!"),
-                                    ],
-                                  ),
-                                ));
-                              }
-                            }, "Kayıt", Colors.black, Colors.white),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text("Hesabınız Varsa",
-                                    style: TextStyle(color: Colors.black)),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          PageRouteBuilder(
-                                            pageBuilder: (context, animation,
-                                                    secondaryAnimation) =>
-                                                const LoginPage(),
-                                            transitionsBuilder: (context,
-                                                animation,
-                                                secondaryAnimation,
-                                                child) {
-                                              const begin = Offset(0.0, 1.0);
-                                              const end = Offset.zero;
-                                              final tween =
-                                                  Tween(begin: begin, end: end);
-                                              final offsetAnimation =
-                                                  animation.drive(tween);
-
-                                              return SlideTransition(
-                                                position: offsetAnimation,
-                                                child: child,
-                                              );
-                                            },
-                                          ));
-                                    },
-                                    child: const Text("Giriş Yap!")),
-                              ],
-                            )
+                            Expanded(
+                                flex: 1,
+                                child: _textfiled(heightController, "Height")),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: _textfiled(ageController, "Weight")),
                           ],
                         ),
+                        const SizedBox(height: 20),
+                        _button(() async {
+                          FirebaseAuth auth = FirebaseAuth.instance;
+                          try {
+                            UserCredential credential =
+                                await auth.createUserWithEmailAndPassword(
+                                    email: usernameController.text,
+                                    password: passwordController.text);
+                            //print(credential);
+
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.check, color: Colors.white),
+                                  Text(' Kullanıcı kayıt edildi.'),
+                                ],
+                              ),
+                            ));
+                          } catch (e) {
+                            print(e.toString());
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Row(
+                                children: const [
+                                  Icon(Icons.error, color: Colors.white),
+                                  Text(" Hata !!!"),
+                                ],
+                              ),
+                            ));
+                          }
+                        }, "Kayıt", Colors.black, Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Hesabınız Varsa",
+                                style: TextStyle(color: Colors.black)),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation,
+                                                secondaryAnimation) =>
+                                            const LoginPage(),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
+                                          const begin = Offset(0.0, 1.0);
+                                          const end = Offset.zero;
+                                          final tween =
+                                              Tween(begin: begin, end: end);
+                                          final offsetAnimation =
+                                              animation.drive(tween);
+
+                                          return SlideTransition(
+                                            position: offsetAnimation,
+                                            child: child,
+                                          );
+                                        },
+                                      ));
+                                },
+                                child: const Text("Giriş Yap!")),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -172,7 +179,8 @@ class _RegisterPageState extends State<RegisterPage> {
       TextField(
         style: TextStyle(color: Colors.black),
         controller: controller,
-        decoration: InputDecoration(labelText: label),
+        decoration: InputDecoration(
+            labelText: label, labelStyle: TextStyle(color: Colors.black)),
       );
   Widget _button(
       Function() onPressed, String text, Color bgColor, Color fgColor) {
