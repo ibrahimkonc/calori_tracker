@@ -39,6 +39,12 @@ class SystemProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void sessionExed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('uid');
+    notifyListeners();
+  }
+
   void userRegisterPost(String userID) async {
     if (userID != "") {
       user.email = usernameController.text;
