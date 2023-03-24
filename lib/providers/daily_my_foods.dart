@@ -15,7 +15,6 @@ class DailyMyFoods extends ChangeNotifier {
   Services service = Services();
 
   void getSearch(String query) async {
-    print("object");
     searchList = await service.getSearch(query);
     notifyListeners();
   }
@@ -23,7 +22,6 @@ class DailyMyFoods extends ChangeNotifier {
   void getDailyMyFoods(int category) async {
     if (isActive == false) {
       searchList.clear();
-      print("lala");
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String userID = prefs.getString('uid') ?? "";
       if (userID != "" && category != "") {
@@ -70,6 +68,4 @@ class DailyMyFoods extends ChangeNotifier {
     }
     return false;
   }
-
-  
 }

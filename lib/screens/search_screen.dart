@@ -1,3 +1,4 @@
+import 'package:calori_tracker/providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/daily_my_foods.dart';
@@ -16,6 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
+    final homeProvider = Provider.of<HomeProvider>(context);
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     dailyFoodProvider.getDailyMyFoods(widget.category);
     dailyFoodProvider.category = widget.category;
@@ -74,6 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 dailyFoodProvider.removeFood(
                                     dailyFoodProvider.dailyMyFoods[index]!,
                                     widget.category);
+                                homeProvider.isGetProcress = false;
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -215,6 +218,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                               widget.category);
 
                                       if (response) {
+                                        homeProvider.isGetProcress = false;
+                                        homeProvider.getProgressData();
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
                                           content: Row(
