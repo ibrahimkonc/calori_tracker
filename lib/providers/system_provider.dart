@@ -1,4 +1,5 @@
 import 'package:calori_tracker/screens/home.dart';
+import 'package:calori_tracker/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,16 +18,7 @@ class SystemProvider with ChangeNotifier {
       ),
     ),
     const HomePage(),
-    Scaffold(
-      body: Container(
-        child: const Center(
-          child: Text(
-            "3",
-            style: TextStyle(color: Colors.white, fontSize: 40),
-          ),
-        ),
-      ),
-    ),
+    const SliverProfilePage(),
   ];
 
   void route(int value) {
