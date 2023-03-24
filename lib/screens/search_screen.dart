@@ -75,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 dailyFoodProvider.removeFood(
                                     dailyFoodProvider.dailyMyFoods[index]!,
                                     widget.category);
-                                homeProvider.isGetProcress = false;
+                                // homeProvider.isGetProcress = false;
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -217,7 +217,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                               widget.category);
 
                                       if (response) {
-                                        homeProvider.isGetProcress = false;
+                                        // homeProvider.isGetProcress = false;
                                         homeProvider.getProgressData();
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
