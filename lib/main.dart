@@ -2,7 +2,6 @@ import 'package:calori_tracker/providers/daily_my_foods.dart';
 import 'package:calori_tracker/providers/home_provider.dart';
 import 'package:calori_tracker/providers/system_provider.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
-import 'package:calori_tracker/screens/home.dart';
 import 'package:calori_tracker/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

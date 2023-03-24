@@ -8,12 +8,14 @@ class CategoryCard extends StatelessWidget {
   final IconData icon;
   final Function() onPressedAdd;
   final Function() onPressedEye;
+  final String image;
   const CategoryCard(
       {super.key,
       required this.title,
       required this.icon,
       required this.onPressedAdd,
-      required this.onPressedEye});
+      required this.onPressedEye,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class CategoryCard extends StatelessWidget {
           color: Colors.white,
           margin: const EdgeInsets.only(top: 10),
           child: Container(
-            decoration: _boxDecoration,
+            decoration: _boxDecoration(image),
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(5),
             child: Stack(
@@ -35,19 +37,19 @@ class CategoryCard extends StatelessWidget {
                     // ignore: sort_child_properties_last
                     child: const Icon(
                       Icons.add,
-                      color: Color.fromARGB(66, 0, 0, 0),
+                      color: Color.fromARGB(160, 0, 0, 0),
                     ),
                     style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(10),
-                    ),
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(10),
+                        backgroundColor: Colors.green.shade200),
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Icon(
                     icon,
-                    color: const Color.fromARGB(102, 0, 0, 0),
+                    color: Color.fromARGB(160, 0, 0, 0),
                   ),
                 ),
                 Align(
@@ -58,7 +60,7 @@ class CategoryCard extends StatelessWidget {
                     onPressed: onPressedEye,
                     icon: const Icon(
                       Icons.remove_red_eye,
-                      color: Color.fromARGB(66, 0, 0, 0),
+                      color: Color.fromARGB(160, 0, 0, 0),
                     ),
                   ),
                 )
@@ -79,7 +81,7 @@ class CategoryCard extends StatelessWidget {
                   bottomRight: Radius.circular(10)),
               boxShadow: const [
                 BoxShadow(
-                  color: Colors.white,
+                  color: Colors.transparent,
                   spreadRadius: 10,
                   blurRadius: 0.5,
                   offset: Offset(0, 5), // changes position of shadow
@@ -99,8 +101,15 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  BoxDecoration get _boxDecoration {
+  BoxDecoration _boxDecoration(String url) {
     return BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(url),
+        colorFilter: ColorFilter.mode(
+            Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+            BlendMode.dstATop),
+        fit: BoxFit.cover,
+      ),
       borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
