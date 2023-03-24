@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/daily_my_foods.dart';
-import '../providers/search_provider.dart';
 import '../providers/theme_provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -18,10 +15,10 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
-    final searchProvider = Provider.of<SearchProvider>(context);
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     dailyFoodProvider.getDailyMyFoods(widget.category);
+    dailyFoodProvider.category = widget.category;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -39,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   textAlignVertical: TextAlignVertical.center,
                   textAlign: TextAlign.left,
                   onSubmitted: (value) {
-                    searchProvider.getSearch(value);
+                    dailyFoodProvider.getSearch(value);
                   },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(0),
@@ -115,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 : Container(),
             Expanded(
               child: ListView.builder(
-                itemCount: searchProvider.searchList.length,
+                itemCount: dailyFoodProvider.searchList.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -136,7 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: [
                                 FittedBox(
                                   child: Text(
-                                    searchProvider.searchList[index].name
+                                    dailyFoodProvider.searchList[index].name
                                         .toString(),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -152,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Cal: ${searchProvider.searchList[index].calories}"),
+                                    "Cal: ${dailyFoodProvider.searchList[index].calories}"),
                               ],
                             ),
                           ),
@@ -168,7 +165,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Prot: ${searchProvider.searchList[index].protein_g} "),
+                                    "Prot: ${dailyFoodProvider.searchList[index].protein_g} "),
                               ],
                             ),
                           ),
@@ -184,7 +181,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Fat:  ${searchProvider.searchList[index].fat_total_g} "),
+                                    "Fat:  ${dailyFoodProvider.searchList[index].fat_total_g} "),
                               ],
                             ),
                           ),
@@ -200,7 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                    "Carb:  ${searchProvider.searchList[index].carbohydrates_total_g} "),
+                                    "Carb:  ${dailyFoodProvider.searchList[index].carbohydrates_total_g} "),
                               ],
                             ),
                           ),
@@ -213,7 +210,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     onPressed: () async {
                                       bool response =
                                           await dailyFoodProvider.addFood(
-                                              searchProvider.searchList[index],
+                                              dailyFoodProvider
+                                                  .searchList[index],
                                               widget.category);
 
                                       if (response) {

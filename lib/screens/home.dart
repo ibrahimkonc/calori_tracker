@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -113,6 +114,7 @@ class HomePage extends StatelessWidget {
                                     title: 'Breakfast',
                                     category: 1,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
                       final dailyFoodProvider =
@@ -140,6 +142,7 @@ class HomePage extends StatelessWidget {
                                     title: 'Lunch',
                                     category: 2,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
                       final dailyFoodProvider =
@@ -157,16 +160,17 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                   CategoryCard(
-                    title: "Diner",
+                    title: "Dinner",
                     icon: Icons.dinner_dining,
                     onPressedAdd: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
-                                    title: 'Diner',
+                                    title: 'Dinner',
                                     category: 3,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
                       final dailyFoodProvider =
@@ -194,6 +198,7 @@ class HomePage extends StatelessWidget {
                                     title: 'Snacks',
                                     category: 4,
                                   )));
+                      dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
                       final dailyFoodProvider =

@@ -1,5 +1,4 @@
 import 'package:calori_tracker/providers/daily_my_foods.dart';
-import 'package:calori_tracker/providers/search_provider.dart';
 import 'package:calori_tracker/providers/system_provider.dart';
 import 'package:calori_tracker/providers/theme_provider.dart';
 import 'package:calori_tracker/screens/login.dart';
@@ -21,7 +20,6 @@ void main() async {
     providers: [
       ListenableProvider(create: (_) => SystemProvider()),
       ListenableProvider(create: (_) => ThemeChanger(4)),
-      ChangeNotifierProvider(create: (_) => SearchProvider()),
       ChangeNotifierProvider(create: (_) => DailyMyFoods()),
     ],
     child: MyApp(data: data),

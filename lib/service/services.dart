@@ -63,9 +63,9 @@ class Services {
     }
   }
 
-  Future<bool> deleteFood(String userID, int category, String food) async {
+  Future<bool> deleteFood(String userID, int category, String foodID) async {
     http.Response response =
-        await http.get(getUrl("foods/$userID/$category/$food"));
+        await http.delete(getUrl("foods/$userID/$category/$foodID"));
     return response.statusCode >= 200 && response.statusCode < 300;
   }
 }
