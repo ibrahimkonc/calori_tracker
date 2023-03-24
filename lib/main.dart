@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: currentTheme,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const ProfilePage(),
+      home: const SliverListPage(),
     );
   }
 }
