@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
 import '../providers/system_provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                                   password: passwordController.text);
                           //normal
                           system.sessionChange(credential.user!.uid);
-
+                          var data = credential.user!.uid;
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Row(
                               children: const [
@@ -99,7 +100,9 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HomePage()));
+                                  builder: (context) => MyApp(
+                                        data: data,
+                                      )));
                         } catch (e) {
                           print(e.toString());
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

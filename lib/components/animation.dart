@@ -11,7 +11,7 @@ class DumenPage extends StatefulWidget {
 class SplashScreenState extends State<DumenPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 2))
+      AnimationController(vsync: this, duration: const Duration(seconds: 1))
         ..repeat();
 
   @override

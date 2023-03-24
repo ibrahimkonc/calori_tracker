@@ -31,6 +31,13 @@ class SystemProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String> getID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('uid') ?? "";
+    notifyListeners();
+    return data;
+  }
+
   void sessionChange(String id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('uid', id);

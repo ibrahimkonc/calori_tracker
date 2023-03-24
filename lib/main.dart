@@ -18,7 +18,7 @@ void main() async {
 
   //await prefs.remove('uid');
   String data = prefs.getString('uid') ?? "";
-  await Future.delayed(const Duration(seconds: 5));
+  await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
@@ -37,7 +37,7 @@ void main() async {
 Future initialization(BuildContext? context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? uid = prefs.getString('uid');
-  await Future.delayed(const Duration(seconds: 3));
+  await Future.delayed(const Duration(seconds: 1));
   if (uid != null) {
     await prefs.setString('uid', uid);
   }
@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
     final systemProvider = Provider.of<SystemProvider>(context);
     if (data == "") {
       systemProvider.pageIndex = 0;
+    } else {
+      systemProvider.pageIndex = 2;
     }
     return MaterialApp(
       theme: currentTheme,
