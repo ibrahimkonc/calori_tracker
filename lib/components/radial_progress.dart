@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
   final double porcentaje;
+  final String porcentajeText;
   // final Color? colorPrimario;
   final Color colorPrimario;
   final Color colorSecundario;
@@ -18,6 +19,7 @@ class RadialProgress extends StatefulWidget {
   const RadialProgress({
     super.key,
     required this.porcentaje,
+    required this.porcentajeText,
     // this.colorPrimario,
     this.colorPrimario = Colors.blue,
     this.colorSecundario = Colors.grey,
@@ -94,7 +96,7 @@ class _RadialProgressState extends State<RadialProgress>
                   ),
                 ),
                 Text(
-                  "%${widget.porcentaje.toString().replaceAll(".0", "")}",
+                  widget.porcentajeText.toString(),
                 )
               ],
             ),

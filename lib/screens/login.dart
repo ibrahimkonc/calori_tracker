@@ -47,9 +47,14 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Column(
               children: [
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.only(top: 50.0, bottom: 15),
-                  child: SizedBox(child: LottieBuilder.asset("assets/lottie/login_lottie.json"), width: 200, height: 200,),
+                  child: SizedBox(
+                    child:
+                        LottieBuilder.asset("assets/lottie/login_lottie.json"),
+                    width: 200,
+                    height: 200,
+                  ),
                 ),
                 Container(
                   decoration: _boxDecoration(Colors.black),
@@ -105,7 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ));
                         }
-                      }, "Giriş", const Color.fromARGB(255, 4, 4, 4), Colors.white),
+                      }, "Giriş", const Color.fromARGB(255, 4, 4, 4),
+                          Colors.white),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -123,7 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                                           secondaryAnimation, child) {
                                         const begin = Offset(0.0, 1.0);
                                         const end = Offset.zero;
-                                        final tween = Tween(begin: begin, end: end);
+                                        final tween =
+                                            Tween(begin: begin, end: end);
                                         final offsetAnimation =
                                             animation.drive(tween);
 
@@ -187,5 +194,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-class Navigation {}
