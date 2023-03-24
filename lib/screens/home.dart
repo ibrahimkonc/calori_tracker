@@ -1,4 +1,5 @@
 import 'package:calori_tracker/components/category_card.dart';
+import 'package:calori_tracker/providers/home_provider.dart';
 import 'package:calori_tracker/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
+    final homeProvider = Provider.of<HomeProvider>(context);
+    // homeProvider.getProgressData();
 
     return Scaffold(
       appBar: AppBar(
@@ -33,61 +36,88 @@ class HomePage extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    const RadialProgress(
+                    RadialProgress(
                       grosorPrimario: 20,
                       grosorSecundario: 21,
                       tipoBordes: StrokeCap.round,
-                      porcentaje: 80,
+                      porcentaje: homeProvider.homeProcress.calories! /
+                          homeProvider.dailyLimit,
                       colorPrimario: Colors.green,
                       colorSecundario: Colors.white,
                       height: 150,
                       width: 150,
                       text: "Calories",
                       textColor: Colors.white,
+                      porcentajeText: (double.parse(homeProvider
+                              .homeProcress.calories!
+                              .toStringAsFixed(2)))
+                          .toString(),
                     ),
                     Stack(
                       alignment: Alignment.topCenter,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             RadialProgress(
                               grosorPrimario: 8,
                               grosorSecundario: 11,
-                              porcentaje: 60,
+                              porcentaje: homeProvider.homeProcress.protein_g! /
+                                  homeProvider.dailyLimit,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Protein",
                               textColor: Colors.white,
+                              porcentajeText: (double.parse(homeProvider
+                                      .homeProcress.protein_g!
+                                      .toStringAsFixed(2)))
+                                  .toString(),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
                             ),
                             RadialProgress(
                               grosorPrimario: 12,
                               grosorSecundario: 8,
                               tipoBordes: StrokeCap.round,
-                              porcentaje: 60,
+                              porcentaje: homeProvider
+                                      .homeProcress.carbohydrates_total_g! /
+                                  homeProvider.dailyLimit,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Carbs",
                               textColor: Colors.white,
+                              porcentajeText: (double.parse(homeProvider
+                                      .homeProcress.carbohydrates_total_g!
+                                      .toStringAsFixed(2)))
+                                  .toString(),
                             ),
                           ],
                         ),
                         Container(
                           margin: const EdgeInsets.only(top: 50),
-                          child: const RadialProgress(
+                          child: RadialProgress(
                             grosorPrimario: 12,
                             grosorSecundario: 12,
                             tipoBordes: StrokeCap.round,
-                            porcentaje: 60,
+                            porcentaje: homeProvider.homeProcress.fat_total_g! /
+                                homeProvider.dailyLimit,
                             colorPrimario: Colors.red,
                             colorSecundario: Colors.white,
                             text: "Fat",
                             textColor: Colors.white,
+                            porcentajeText: (double.parse(homeProvider
+                                    .homeProcress.fat_total_g!
+                                    .toStringAsFixed(2)))
+                                .toString(),
                           ),
                         ),
+                        IconButton(
+                          icon: Icon(Icons.refresh),
+                          onPressed: () {
+                            homeProvider.getProgressData();
+                          },
+                        )
                       ],
                     ),
                   ],
@@ -117,31 +147,49 @@ class HomePage extends StatelessWidget {
                       dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(1);
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return const AlertDialog(
-                              title: Text('Breakfast List'),
-                              content: SetupAlertDialoadContainer(),
+                              //title: Text('Breakfast List'),
+                              content: SetupAlertDialoadContainer(
+                                  title: "Breakfast List"),
                             );
                           });
                     },
+                    image: 'assets/images/breakfast.png',
                   ),
                   CategoryCard(
-                    title: "Lunch",
-                    icon: Icons.local_restaurant_outlined,
-                    onPressedAdd: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SearchScreen(
-                                    title: 'Lunch',
-                                    category: 2,
-                                  )));
-                      dailyFoodProvider.isActive = false;
-                    },
-                    onPressedEye: () {},
-                  ),
+                      title: "Lunch",
+                      icon: Icons.local_restaurant_outlined,
+                      onPressedAdd: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SearchScreen(
+                                      title: 'Lunch',
+                                      category: 2,
+                                    )));
+                        dailyFoodProvider.isActive = false;
+                      },
+                      onPressedEye: () {
+                        final dailyFoodProvider =
+                            Provider.of<DailyMyFoods>(context, listen: false);
+                        dailyFoodProvider.getDailyMyFoods(2);
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertDialog(
+                                //title: Text('Breakfast List'),
+                                content:
+                                    SetupAlertDialoadContainer(title: "Lunch"),
+                              );
+                            });
+                      },
+                      image: 'assets/images/lunch.png'),
                   CategoryCard(
                     title: "Dinner",
                     icon: Icons.dinner_dining,
@@ -155,7 +203,21 @@ class HomePage extends StatelessWidget {
                                   )));
                       dailyFoodProvider.isActive = false;
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(3);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Dinner"),
+                            );
+                          });
+                    },
+                    image: 'assets/images/dinner.png',
                   ),
                   CategoryCard(
                     title: "Snacks",
@@ -170,7 +232,21 @@ class HomePage extends StatelessWidget {
                                   )));
                       dailyFoodProvider.isActive = false;
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(4);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Snacks"),
+                            );
+                          });
+                    },
+                    image: 'assets/images/snacks.png',
                   )
                 ],
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
