@@ -68,4 +68,23 @@ class Services {
         await http.delete(getUrl("foods/$userID/$category/$foodID"));
     return response.statusCode >= 200 && response.statusCode < 300;
   }
+
+  Future<List<Items>?> getFoodAll(String userID) async {
+    List<Items> list = [];
+
+    for (int i = 1; i <= 4; i++) {
+      http.Response response = await http.get(getUrl("foods/$userID/$i"));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        var data = json.decode(response.body);
+        if (data != null) {
+          for (var key in data.keys) {
+            Items food = Items.fromMap(data[key]);
+            food.foodID = key;
+            list.add(food);
+          }
+        }
+      }
+    }
+    return list;
+  }
 }
