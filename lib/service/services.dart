@@ -1,20 +1,20 @@
 import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
-
 import '../model/item_model.dart';
-const String realTimeDbBaseUrl =
+
+const String _baseUrlSearch =
+    "https://api.calorieninjas.com/v1/nutrition?query=";
+const String _baseUrl =
     "https://calori-tracker-c2f3e-default-rtdb.europe-west1.firebasedatabase.app/";
 
-const String _baseUrl = "https://api.calorieninjas.com/v1/nutrition?query=";
-
 class Services {
-  Uri getUrl(String search) => Uri.parse("$_baseUrl$search");
+  Uri getUrlSearch(String search) => Uri.parse("$_baseUrlSearch$search");
+  Uri getUrl(String endpoint) => Uri.parse("$_baseUrl$endpoint.json");
 
+  //var url = Uri.https(_baseUrl, "/users", {"auth": idtoken});
   Future<List<Items>> getSearch(String search) async {
     List<Items> list = [];
-    http.Response response = await http.get(getUrl(search),
+    http.Response response = await http.get(getUrlSearch(search),
         headers: {"X-Api-Key": "2mF1bpVMokPCnhzOwEnPgQ==Oa5RTTQJPVM6iEzT"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
@@ -29,7 +29,43 @@ class Services {
     return list;
   }
 
+  Future<String> addFoodPost(Items data, String userID, int categoryID) async {
+    http.Response response = await http.post(
+        getUrl("foods/$userID/$categoryID"),
+        body: data.toJson(),
+        headers: {"Content-Type": "application/json"});
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
 
+      var processID = data["name"];
+      return processID;
+    } else {
+      return "";
+    }
+  }
 
+  Future<List<Items>?> getFoodById(String userID, int category) async {
+    List<Items> list = [];
+    http.Response response = await http.get(getUrl("foods/$userID/$category"));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      if (data != null) {
+        for (var key in data.keys) {
+          Items food = Items.fromMap(data[key]);
+          food.foodID = key;
+          list.add(food);
+        }
+        return list;
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
 
+  Future<bool> deleteFood(String userID, int category, String food) async {
+    http.Response response =
+        await http.get(getUrl("foods/$userID/$category/$food"));
+    return response.statusCode >= 200 && response.statusCode < 300;
+  }
 }

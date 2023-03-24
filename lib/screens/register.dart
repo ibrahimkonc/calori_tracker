@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'login.dart';
 
@@ -39,87 +40,96 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-            child: Container(
-              decoration: _boxDecoration(Colors.black),
-              margin: const EdgeInsets.symmetric(horizontal: 40),
-              padding: const EdgeInsets.all(10),
-              height: 350,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Kayıt Ol",
-                    style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                  const SizedBox(height: 20),
-                  _textfiled(usernameController, "Username"),
-                  _textfiled(passwordController, "Password"),
-                  const SizedBox(height: 20),
-                  _button(() async {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-                    try {
-                      UserCredential credential =
-                          await auth.createUserWithEmailAndPassword(
-                              email: usernameController.text,
-                              password: passwordController.text);
-                      //print(credential);
-
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Row(
-                          children: const [
-                            Icon(Icons.check, color: Colors.white),
-                            Text(' Kullanıcı kayıt edildi.'),
-                          ],
-                        ),
-                      ));
-                    } catch (e) {
-                      print(e.toString());
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Row(
-                          children: const [
-                            Icon(Icons.error, color: Colors.white),
-                            Text(" Hata !!!"),
-                          ],
-                        ),
-                      ));
-                    }
-                  }, "Kayıt", Colors.black, Colors.white),
-                  Row(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0, bottom: 15),
+                  child: SizedBox(child: LottieBuilder.asset("assets/lottie/login_lottie.json"), width: 200, height: 200,),
+                ),
+                Container(
+                  decoration: _boxDecoration(Colors.black),
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.all(10),
+                  height: 350,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Hesabınız Varsa"),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                PageRouteBuilder(
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      const LoginPage(),
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    const begin = Offset(0.0, 1.0);
-                                    const end = Offset.zero;
-                                    final tween = Tween(begin: begin, end: end);
-                                    final offsetAnimation =
-                                        animation.drive(tween);
+                      const Text(
+                        "Kayıt Ol",
+                        style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                      const SizedBox(height: 20),
+                      _textfiled(usernameController, "Username"),
+                      _textfiled(passwordController, "Password"),
+                      const SizedBox(height: 20),
+                      _button(() async {
+                        FirebaseAuth auth = FirebaseAuth.instance;
+                        try {
+                          UserCredential credential =
+                              await auth.createUserWithEmailAndPassword(
+                                  email: usernameController.text,
+                                  password: passwordController.text);
+                          //print(credential);
 
-                                    return SlideTransition(
-                                      position: offsetAnimation,
-                                      child: child,
-                                    );
-                                  },
-                                ));
-                          },
-                          child: const Text("Giriş Yap!")),
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Row(
+                              children: const [
+                                Icon(Icons.check, color: Colors.white),
+                                Text(' Kullanıcı kayıt edildi.'),
+                              ],
+                            ),
+                          ));
+                        } catch (e) {
+                          print(e.toString());
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Row(
+                              children: const [
+                                Icon(Icons.error, color: Colors.white),
+                                Text(" Hata !!!"),
+                              ],
+                            ),
+                          ));
+                        }
+                      }, "Kayıt", Colors.black, Colors.white),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Hesabınız Varsa",
+                              style: TextStyle(color: Colors.black)),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation,
+                                              secondaryAnimation) =>
+                                          const LoginPage(),
+                                      transitionsBuilder: (context, animation,
+                                          secondaryAnimation, child) {
+                                        const begin = Offset(0.0, 1.0);
+                                        const end = Offset.zero;
+                                        final tween = Tween(begin: begin, end: end);
+                                        final offsetAnimation =
+                                            animation.drive(tween);
+
+                                        return SlideTransition(
+                                          position: offsetAnimation,
+                                          child: child,
+                                        );
+                                      },
+                                    ));
+                              },
+                              child: const Text("Giriş Yap!")),
+                        ],
+                      )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -129,6 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _textfiled(TextEditingController controller, String label) =>
       TextField(
+        style: TextStyle(color: Colors.black),
         controller: controller,
         decoration: InputDecoration(labelText: label),
       );

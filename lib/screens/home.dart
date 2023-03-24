@@ -1,8 +1,10 @@
 import 'package:calori_tracker/components/category_card.dart';
+import 'package:calori_tracker/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:calori_tracker/components/radial_progress.dart';
 import '../components/drawer.dart';
+import '../components/history_alertdialog.dart';
 import '../providers/theme_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -92,46 +94,85 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
-              child: Center(
-                child: GridView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  // shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  // ignore: sort_child_properties_last
-                  children: [
-                    CategoryCard(
-                      title: "Brakfast",
-                      icon: Icons.coffee_outlined,
-                      onPressedAdd: () {},
-                      onPressedEye: () {},
-                    ),
-                    CategoryCard(
-                      title: "Lunch",
-                      icon: Icons.local_restaurant_outlined,
-                      onPressedAdd: () {},
-                      onPressedEye: () {},
-                    ),
-                    CategoryCard(
-                      title: "Diner",
-                      icon: Icons.dinner_dining,
-                      onPressedAdd: () {},
-                      onPressedEye: () {},
-                    ),
-                    CategoryCard(
-                      title: "Snacks",
-                      icon: Icons.fastfood_outlined,
-                      onPressedAdd: () {},
-                      onPressedEye: () {},
-                    )
-                  ],
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.0,
-                    crossAxisSpacing: 18,
-                    mainAxisSpacing: 20,
-                    mainAxisExtent: 150,
+            child: Center(
+              child: GridView(
+                // physics: const NeverScrollableScrollPhysics(),
+                // shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                // ignore: sort_child_properties_last
+                children: [
+                  CategoryCard(
+                    title: "Breakfast",
+                    icon: Icons.coffee_outlined,
+                    onPressedAdd: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchScreen(
+                                    title: 'Breakfast',
+                                    category: 1,
+                                  )));
+                    },
+                    onPressedEye: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              title: Text('Breakfast List'),
+                              content: SetupAlertDialoadContainer(),
+                            );
+                          });
+                    },
                   ),
+                  CategoryCard(
+                    title: "Lunch",
+                    icon: Icons.local_restaurant_outlined,
+                    onPressedAdd: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchScreen(
+                                    title: 'Lunch',
+                                    category: 2,
+                                  )));
+                    },
+                    onPressedEye: () {},
+                  ),
+                  CategoryCard(
+                    title: "Diner",
+                    icon: Icons.dinner_dining,
+                    onPressedAdd: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchScreen(
+                                    title: 'Diner',
+                                    category: 3,
+                                  )));
+                    },
+                    onPressedEye: () {},
+                  ),
+                  CategoryCard(
+                    title: "Snacks",
+                    icon: Icons.fastfood_outlined,
+                    onPressedAdd: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchScreen(
+                                    title: 'Snacks',
+                                    category: 4,
+                                  )));
+                    },
+                    onPressedEye: () {},
+                  )
+                ],
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.0,
+                  crossAxisSpacing: 18,
+                  mainAxisSpacing: 20,
+                  mainAxisExtent: MediaQuery.of(context).size.height * 0.16,
                 ),
               ),
             ),

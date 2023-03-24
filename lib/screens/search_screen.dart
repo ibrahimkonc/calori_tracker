@@ -1,11 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/daily_my_foods.dart';
 import '../providers/search_provider.dart';
+import '../providers/theme_provider.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  final String title;
+  final int category;
+  const SearchScreen({super.key, required this.title, required this.category});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -16,13 +20,15 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final searchProvider = Provider.of<SearchProvider>(context);
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    dailyFoodProvider.getDailyMyFoods(widget.category);
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.grey,
-          title: const Text("Breakfast"),
+          backgroundColor: appTheme.colorScheme.secondary,
+          title: Text(widget.title),
         ),
         body: Column(
           children: [
@@ -69,19 +75,21 @@ class _SearchScreenState extends State<SearchScreen> {
                               key: UniqueKey(),
                               onDismissed: (direction) {
                                 dailyFoodProvider.removeFood(
-                                    dailyFoodProvider.dailyMyFoods[index]);
+                                    dailyFoodProvider.dailyMyFoods[index]!,
+                                    widget.category);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      color: Colors.grey[300],
+                                      color: Colors.green[700],
                                       border: Border.all(),
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Center(
                                     child: Text(
-                                      dailyFoodProvider.dailyMyFoods[index].name
+                                      dailyFoodProvider
+                                          .dailyMyFoods[index]!.name
                                           .toString(),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -114,7 +122,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: Colors.grey[800],
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(5)),
                       child: Row(
@@ -202,11 +210,40 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                    onPressed: () {
-                                      dailyFoodProvider.addFood(
-                                          searchProvider.searchList[index]);
+                                    onPressed: () async {
+                                      bool response =
+                                          await dailyFoodProvider.addFood(
+                                              searchProvider.searchList[index],
+                                              widget.category);
+
+                                      if (response) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Row(
+                                            children: const [
+                                              Icon(Icons.check,
+                                                  color: Colors.white),
+                                              Text(' Yemek Başarıyla Eklendi'),
+                                            ],
+                                          ),
+                                        ));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Row(
+                                            children: const [
+                                              Icon(Icons.cancel_presentation,
+                                                  color: Colors.white),
+                                              Text(' Yemek Eklenemedi'),
+                                            ],
+                                          ),
+                                        ));
+                                      }
                                     },
-                                    icon: const Icon(Icons.add)),
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.green[500],
+                                    )),
                               ],
                             ),
                           )
