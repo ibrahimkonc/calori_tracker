@@ -1,38 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/system_provider.dart';
 import 'login.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  late TextEditingController usernameController;
-  late TextEditingController passwordController;
-  late TextEditingController first_lastNameController;
-  late TextEditingController ageController;
-  late TextEditingController heightController;
-  late TextEditingController weightController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    usernameController = TextEditingController(text: "admin@gmail.com");
-    passwordController = TextEditingController(text: "123567890");
-    first_lastNameController = TextEditingController();
-    ageController = TextEditingController();
-    heightController = TextEditingController();
-    weightController = TextEditingController();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final systemProvider = Provider.of<SystemProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -77,27 +56,36 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.black),
                         ),
                         const SizedBox(height: 20),
-                        _textfiled(usernameController, "Email"),
-                        _textfiled(passwordController, "Password"),
-                        _textfiled(
-                            first_lastNameController, "First and Last Name"),
+                        _textfiled(systemProvider.usernameController, "Email",
+                            TextInputType.emailAddress),
+                        _textfiled(systemProvider.passwordController,
+                            "Password", TextInputType.text),
+                        _textfiled(systemProvider.firstLastNameController,
+                            "First and Last Name", TextInputType.text),
                         Row(
                           children: [
                             Expanded(
                                 flex: 1,
-                                child: _textfiled(ageController, "Age")),
+                                child: _textfiled(systemProvider.ageController,
+                                    "Age", TextInputType.number)),
                             SizedBox(
                               width: 10,
                             ),
                             Expanded(
                                 flex: 1,
-                                child: _textfiled(heightController, "Height")),
+                                child: _textfiled(
+                                    systemProvider.heightController,
+                                    "Height",
+                                    TextInputType.number)),
                             SizedBox(
                               width: 10,
                             ),
                             Expanded(
                                 flex: 1,
-                                child: _textfiled(ageController, "Weight")),
+                                child: _textfiled(
+                                    systemProvider.weightController,
+                                    "Weight",
+                                    TextInputType.number)),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -106,10 +94,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           try {
                             UserCredential credential =
                                 await auth.createUserWithEmailAndPassword(
-                                    email: usernameController.text,
-                                    password: passwordController.text);
-                            //print(credential);
-
+                                    email:
+                                        systemProvider.usernameController.text,
+                                    password:
+                                        systemProvider.passwordController.text);
+                            //  print(credential);
+                            systemProvider
+                                .userRegisterPost(credential.user!.uid);
                             Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Row(
@@ -175,13 +166,16 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textfiled(TextEditingController controller, String label) =>
+  Widget _textfiled(
+          TextEditingController controller, String label, TextInputType type) =>
       TextField(
+        keyboardType: type,
         style: TextStyle(color: Colors.black),
         controller: controller,
         decoration: InputDecoration(
             labelText: label, labelStyle: TextStyle(color: Colors.black)),
       );
+
   Widget _button(
       Function() onPressed, String text, Color bgColor, Color fgColor) {
     return ElevatedButton(

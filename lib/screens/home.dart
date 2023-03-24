@@ -114,8 +114,8 @@ class HomePage extends StatelessWidget {
                         ),
                         IconButton(
                           icon: Icon(Icons.refresh),
-                          onPressed: () {
-                            homeProvider.getProgressData();
+                          onPressed: () async {
+                           homeProvider.getProgressData();
                             homeProvider.isGetProcress = false;
                           },
                         )

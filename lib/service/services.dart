@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:calori_tracker/model/news_model.dart';
+import 'package:calori_tracker/model/user_model.dart';
 import 'package:http/http.dart' as http;
 import '../model/item_model.dart';
 
@@ -37,7 +38,6 @@ class Services {
         headers: {"Content-Type": "application/json"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
-
       var processID = data["name"];
       return processID;
     } else {
@@ -97,7 +97,6 @@ class Services {
 
   Future<List<Items>?> getFoodAll(String userID) async {
     List<Items> list = [];
-
     for (int i = 1; i <= 4; i++) {
       http.Response response = await http.get(getUrl("foods/$userID/$i"));
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -112,5 +111,17 @@ class Services {
       }
     }
     return list;
+  }
+
+  Future<String> userRegisterPost(User data, String userID) async {
+    http.Response response = await http.post(getUrl("foods/$userID/0"),
+        body: data.toJson(), headers: {"Content-Type": "application/json"});
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      var processID = data["name"];
+      return processID;
+    } else {
+      return "";
+    }
   }
 }
