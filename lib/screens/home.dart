@@ -154,35 +154,36 @@ class HomePage extends StatelessWidget {
                             );
                           });
                     },
+                    image: 'assets/images/breakfast.png',
                   ),
                   CategoryCard(
-                    title: "Lunch",
-                    icon: Icons.local_restaurant_outlined,
-                    onPressedAdd: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SearchScreen(
-                                    title: 'Lunch',
-                                    category: 2,
-                                  )));
-                      dailyFoodProvider.isActive = false;
-                    },
-                    onPressedEye: () {
-                      final dailyFoodProvider =
-                          Provider.of<DailyMyFoods>(context, listen: false);
-                      dailyFoodProvider.getDailyMyFoods(2);
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const AlertDialog(
-                              //title: Text('Breakfast List'),
-                              content:
-                                  SetupAlertDialoadContainer(title: "Lunch"),
-                            );
-                          });
-                    },
-                  ),
+                      title: "Lunch",
+                      icon: Icons.local_restaurant_outlined,
+                      onPressedAdd: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SearchScreen(
+                                      title: 'Lunch',
+                                      category: 2,
+                                    )));
+                        dailyFoodProvider.isActive = false;
+                      },
+                      onPressedEye: () {
+                        final dailyFoodProvider =
+                            Provider.of<DailyMyFoods>(context, listen: false);
+                        dailyFoodProvider.getDailyMyFoods(2);
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AlertDialog(
+                                //title: Text('Breakfast List'),
+                                content:
+                                    SetupAlertDialoadContainer(title: "Lunch"),
+                              );
+                            });
+                      },
+                      image: 'assets/images/lunch.png'),
                   CategoryCard(
                     title: "Dinner",
                     icon: Icons.dinner_dining,
@@ -206,10 +207,11 @@ class HomePage extends StatelessWidget {
                             return const AlertDialog(
                               //title: Text('Breakfast List'),
                               content:
-                                  SetupAlertDialoadContainer(title: "Diner"),
+                                  SetupAlertDialoadContainer(title: "Dinner"),
                             );
                           });
                     },
+                    image: 'assets/images/dinner.png',
                   ),
                   CategoryCard(
                     title: "Snacks",
@@ -238,6 +240,7 @@ class HomePage extends StatelessWidget {
                             );
                           });
                     },
+                    image: 'assets/images/snacks.png',
                   )
                 ],
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
