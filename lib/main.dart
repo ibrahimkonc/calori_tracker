@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                 onTap: (int value) {
                   systemProvider.route(value);
                 },
-                pageIndex: systemProvider.pageIndex,
+                pageIndex: systemProvider.pageIndex - 1,
               ),
             ),
     );
