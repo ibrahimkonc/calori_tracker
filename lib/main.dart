@@ -13,7 +13,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.remove('uid');
+  // await prefs.remove('uid');
   String data = prefs.getString('uid') ?? "";
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 

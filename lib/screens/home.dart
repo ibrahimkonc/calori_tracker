@@ -110,13 +110,14 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
                                     title: 'Breakfast',
+                                    category: 1,
                                   )));
                     },
                     onPressedEye: () {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return AlertDialog(
+                            return const AlertDialog(
                               title: Text('Breakfast List'),
                               content: SetupAlertDialoadContainer(),
                             );
@@ -132,6 +133,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
                                     title: 'Lunch',
+                                    category: 2,
                                   )));
                     },
                     onPressedEye: () {},
@@ -145,6 +147,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
                                     title: 'Diner',
+                                    category: 3,
                                   )));
                     },
                     onPressedEye: () {},
@@ -158,6 +161,7 @@ class HomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const SearchScreen(
                                     title: 'Snacks',
+                                    category: 4,
                                   )));
                     },
                     onPressedEye: () {},

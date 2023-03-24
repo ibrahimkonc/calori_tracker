@@ -9,8 +9,9 @@ const String _baseUrl =
 
 class Services {
   Uri getUrlSearch(String search) => Uri.parse("$_baseUrlSearch$search");
-  Uri getUrl(String endpoint) => Uri.parse("$_baseUrl/$endpoint.json");
+  Uri getUrl(String endpoint) => Uri.parse("$_baseUrl$endpoint.json");
 
+  //var url = Uri.https(_baseUrl, "/users", {"auth": idtoken});
   Future<List<Items>> getSearch(String search) async {
     List<Items> list = [];
     http.Response response = await http.get(getUrlSearch(search),
@@ -28,15 +29,43 @@ class Services {
     return list;
   }
 
-  Future<String> addFoodPost(Items data) async {
-    http.Response response = await http.post(getUrl("foods"),
-        body: data.toJson(), headers: {"Content-Type": "application/json"});
+  Future<String> addFoodPost(Items data, String userID, int categoryID) async {
+    http.Response response = await http.post(
+        getUrl("foods/$userID/$categoryID"),
+        body: data.toJson(),
+        headers: {"Content-Type": "application/json"});
     if (response.statusCode >= 200 && response.statusCode < 300) {
       var data = json.decode(response.body);
+
       var processID = data["name"];
       return processID;
     } else {
       return "";
     }
+  }
+
+  Future<List<Items>?> getFoodById(String userID, int category) async {
+    List<Items> list = [];
+    http.Response response = await http.get(getUrl("foods/$userID/$category"));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      var data = json.decode(response.body);
+      if (data != null) {
+        for (var key in data.keys) {
+          Items food = Items.fromMap(data[key]);
+          food.foodID = key;
+          list.add(food);
+        }
+        return list;
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
+
+  Future<bool> deleteFood(String userID, int category, String food) async {
+    http.Response response =
+        await http.get(getUrl("foods/$userID/$category/$food"));
+    return response.statusCode >= 200 && response.statusCode < 300;
   }
 }

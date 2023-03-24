@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,7 +8,8 @@ import '../providers/theme_provider.dart';
 
 class SearchScreen extends StatefulWidget {
   final String title;
-  const SearchScreen({super.key, required this.title});
+  final int category;
+  const SearchScreen({super.key, required this.title, required this.category});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -19,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final searchProvider = Provider.of<SearchProvider>(context);
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+    dailyFoodProvider.getDailyMyFoods(widget.category);
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -72,7 +75,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               key: UniqueKey(),
                               onDismissed: (direction) {
                                 dailyFoodProvider.removeFood(
-                                    dailyFoodProvider.dailyMyFoods[index]);
+                                    dailyFoodProvider.dailyMyFoods[index]!,
+                                    widget.category);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -84,7 +88,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Center(
                                     child: Text(
-                                      dailyFoodProvider.dailyMyFoods[index].name
+                                      dailyFoodProvider
+                                          .dailyMyFoods[index]!.name
                                           .toString(),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -208,7 +213,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     onPressed: () async {
                                       bool response =
                                           await dailyFoodProvider.addFood(
-                                              searchProvider.searchList[index]);
+                                              searchProvider.searchList[index],
+                                              widget.category);
 
                                       if (response) {
                                         ScaffoldMessenger.of(context)
@@ -226,7 +232,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                             .showSnackBar(SnackBar(
                                           content: Row(
                                             children: const [
-                                              Icon(Icons.check,
+                                              Icon(Icons.cancel_presentation,
                                                   color: Colors.white),
                                               Text(' Yemek Eklenemedi'),
                                             ],
