@@ -38,12 +38,13 @@ class _MainScroll extends StatelessWidget {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
-        // SliverAppBar(
-        //   floating: true,
-        //   elevation: 0,
-        //   backgroundColor: Colors.red,
-        //   title: Text('Hola Mundo'),
-        // ),
+        SliverAppBar(
+          floating: true,
+          elevation: 0,
+          backgroundColor: Colors.pink,
+          centerTitle: true,
+          title: Text('Calorie Tricker'),
+        ),
         SliverPersistentHeader(
           floating: true,
           delegate: _SliverCustomHeaderDelegate(
