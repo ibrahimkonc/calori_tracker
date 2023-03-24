@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 child: Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      color: Colors.grey[300],
+                                      color: Colors.green[700],
                                       border: Border.all(),
                                       borderRadius: BorderRadius.circular(5)),
                                   child: Center(
@@ -117,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: Colors.grey[800],
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(5)),
                       child: Row(
@@ -205,11 +205,39 @@ class _SearchScreenState extends State<SearchScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                    onPressed: () {
-                                      dailyFoodProvider.addFood(
-                                          searchProvider.searchList[index]);
+                                    onPressed: () async {
+                                      bool response =
+                                          await dailyFoodProvider.addFood(
+                                              searchProvider.searchList[index]);
+
+                                      if (response) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Row(
+                                            children: const [
+                                              Icon(Icons.check,
+                                                  color: Colors.white),
+                                              Text(' Yemek Başarıyla Eklendi'),
+                                            ],
+                                          ),
+                                        ));
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Row(
+                                            children: const [
+                                              Icon(Icons.check,
+                                                  color: Colors.white),
+                                              Text(' Yemek Eklenemedi'),
+                                            ],
+                                          ),
+                                        ));
+                                      }
                                     },
-                                    icon: const Icon(Icons.add)),
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.green[500],
+                                    )),
                               ],
                             ),
                           )
