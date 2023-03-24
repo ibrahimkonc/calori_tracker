@@ -9,15 +9,27 @@ import '../components/history_alertdialog.dart';
 import '../providers/daily_my_foods.dart';
 import '../providers/theme_provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.microtask(() =>
+        {Provider.of<HomeProvider>(context, listen: false).getProgressData()});
+  }
 
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     final dailyFoodProvider = Provider.of<DailyMyFoods>(context);
     final homeProvider = Provider.of<HomeProvider>(context);
-    homeProvider.getProgressData();
 
     return Scaffold(
       appBar: AppBar(
@@ -40,17 +52,16 @@ class HomePage extends StatelessWidget {
                       grosorPrimario: 20,
                       grosorSecundario: 21,
                       tipoBordes: StrokeCap.round,
-                      porcentaje: homeProvider.homeProcress.calories! /
-                          homeProvider.dailyLimit,
+                      porcentaje:
+                          homeProvider.calories / homeProvider.dailyLimit,
                       colorPrimario: Colors.green,
                       colorSecundario: Colors.white,
                       height: 150,
                       width: 150,
                       text: "Calories",
                       textColor: Colors.white,
-                      porcentajeText: (double.parse(homeProvider
-                              .homeProcress.calories!
-                              .toStringAsFixed(2)))
+                      porcentajeText: (double.parse(
+                              homeProvider.calories.toStringAsFixed(2)))
                           .toString(),
                     ),
                     Stack(
@@ -62,15 +73,14 @@ class HomePage extends StatelessWidget {
                             RadialProgress(
                               grosorPrimario: 8,
                               grosorSecundario: 11,
-                              porcentaje: homeProvider.homeProcress.protein_g! /
+                              porcentaje: homeProvider.proteinG /
                                   homeProvider.dailyLimit,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Protein",
                               textColor: Colors.white,
-                              porcentajeText: (double.parse(homeProvider
-                                      .homeProcress.protein_g!
-                                      .toStringAsFixed(2)))
+                              porcentajeText: (double.parse(
+                                      homeProvider.proteinG.toStringAsFixed(2)))
                                   .toString(),
                             ),
                             const SizedBox(
@@ -80,15 +90,14 @@ class HomePage extends StatelessWidget {
                               grosorPrimario: 12,
                               grosorSecundario: 8,
                               tipoBordes: StrokeCap.round,
-                              porcentaje: homeProvider
-                                      .homeProcress.carbohydrates_total_g! /
+                              porcentaje: homeProvider.carbohydratesTotalG /
                                   homeProvider.dailyLimit,
                               colorPrimario: Colors.red,
                               colorSecundario: Colors.white,
                               text: "Carbs",
                               textColor: Colors.white,
                               porcentajeText: (double.parse(homeProvider
-                                      .homeProcress.carbohydrates_total_g!
+                                      .carbohydratesTotalG
                                       .toStringAsFixed(2)))
                                   .toString(),
                             ),
@@ -100,25 +109,25 @@ class HomePage extends StatelessWidget {
                             grosorPrimario: 12,
                             grosorSecundario: 12,
                             tipoBordes: StrokeCap.round,
-                            porcentaje: homeProvider.homeProcress.fat_total_g! /
+                            porcentaje: homeProvider.fatTotalG /
                                 homeProvider.dailyLimit,
                             colorPrimario: Colors.red,
                             colorSecundario: Colors.white,
                             text: "Fat",
                             textColor: Colors.white,
-                            porcentajeText: (double.parse(homeProvider
-                                    .homeProcress.fat_total_g!
-                                    .toStringAsFixed(2)))
+                            porcentajeText: (double.parse(
+                                    homeProvider.fatTotalG.toStringAsFixed(2)))
                                 .toString(),
                           ),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.refresh),
-                          onPressed: () {
-                            homeProvider.getProgressData();
-                            homeProvider.isGetProcress = false;
-                          },
-                        )
+                        context.watch<HomeProvider>().isLoading
+                            ? const CircularProgressIndicator()
+                            : IconButton(
+                                icon: const Icon(Icons.refresh),
+                                onPressed: () {
+                                  homeProvider.getProgressData();
+                                },
+                              )
                       ],
                     ),
                   ],
