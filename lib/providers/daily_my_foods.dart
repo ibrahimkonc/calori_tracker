@@ -70,4 +70,6 @@ class DailyMyFoods extends ChangeNotifier {
     }
     return false;
   }
+
+  
 }
