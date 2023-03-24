@@ -22,13 +22,14 @@ class SliverProfilePage extends StatelessWidget {
 
 class _MainScroll extends StatelessWidget {
   final items = [
-    const _ListItem('Age', Colors.white, Icons.numbers),
-    const _ListItem('Height', Colors.white, Icons.height),
-    const _ListItem('Weight', Colors.white, Icons.line_weight),
-    const _ListItem('Calories', Colors.white, Icons.local_restaurant_outlined),
-    const _ListItem('Protein', Colors.white, Icons.local_restaurant_outlined),
-    const _ListItem('Carbs', Colors.white, Icons.local_restaurant_outlined),
-    const _ListItem('Fat', Colors.white, Icons.local_restaurant_outlined),
+    const _ListItem('Age', myPrimaryColor, Icons.numbers),
+    const _ListItem('Height', myPrimaryColor, Icons.height),
+    const _ListItem('Weight', myPrimaryColor, Icons.line_weight),
+    const _ListItem(
+        'Calories', myPrimaryColor, Icons.local_restaurant_outlined),
+    const _ListItem('Protein', myPrimaryColor, Icons.local_restaurant_outlined),
+    const _ListItem('Carbs', myPrimaryColor, Icons.local_restaurant_outlined),
+    const _ListItem('Fat', myPrimaryColor, Icons.local_restaurant_outlined),
   ];
 
   @override
@@ -38,12 +39,6 @@ class _MainScroll extends StatelessWidget {
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
       slivers: [
-        // SliverAppBar(
-        //   floating: true,
-        //   elevation: 0,
-        //   backgroundColor: Colors.red,
-        //   title: Text('Hola Mundo'),
-        // ),
         SliverPersistentHeader(
           floating: true,
           delegate: _SliverCustomHeaderDelegate(
@@ -189,3 +184,5 @@ class _ListItem extends StatelessWidget {
     );
   }
 }
+
+const Color myPrimaryColor = Colors.white;

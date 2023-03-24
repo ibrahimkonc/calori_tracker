@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     final system = Provider.of<SystemProvider>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -159,7 +160,8 @@ class _LoginPageState extends State<LoginPage> {
       TextField(
         style: TextStyle(color: Colors.black),
         controller: controller,
-        decoration: InputDecoration(labelText: label),
+        decoration: InputDecoration(
+            labelText: label, labelStyle: TextStyle(color: Colors.black)),
       );
 
   Widget _button(
