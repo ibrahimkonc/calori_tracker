@@ -148,8 +148,7 @@ class HomePage extends StatelessWidget {
                       dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
-                      final dailyFoodProvider =
-                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.isActive = false;
                       dailyFoodProvider.getDailyMyFoods(1);
                       showDialog(
                           context: context,
@@ -177,8 +176,7 @@ class HomePage extends StatelessWidget {
                         dailyFoodProvider.isActive = false;
                       },
                       onPressedEye: () {
-                        final dailyFoodProvider =
-                            Provider.of<DailyMyFoods>(context, listen: false);
+                        dailyFoodProvider.isActive = false;
                         dailyFoodProvider.getDailyMyFoods(2);
                         showDialog(
                             context: context,
@@ -205,8 +203,7 @@ class HomePage extends StatelessWidget {
                       dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
-                      final dailyFoodProvider =
-                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.isActive = false;
                       dailyFoodProvider.getDailyMyFoods(3);
                       showDialog(
                           context: context,
@@ -234,9 +231,9 @@ class HomePage extends StatelessWidget {
                       dailyFoodProvider.isActive = false;
                     },
                     onPressedEye: () {
-                      final dailyFoodProvider =
-                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.isActive = false;
                       dailyFoodProvider.getDailyMyFoods(4);
+
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {

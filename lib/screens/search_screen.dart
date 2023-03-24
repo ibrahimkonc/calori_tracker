@@ -20,7 +20,6 @@ class _SearchScreenState extends State<SearchScreen> {
     final homeProvider = Provider.of<HomeProvider>(context);
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
     dailyFoodProvider.getDailyMyFoods(widget.category);
-    dailyFoodProvider.category = widget.category;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,

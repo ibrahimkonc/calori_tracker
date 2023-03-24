@@ -8,7 +8,6 @@ class DailyMyFoods extends ChangeNotifier {
   List<Items?> get dailyMyFoods => _dailyMyFoods;
   var services = Services();
   bool isActive = false;
-  int category = 0;
 
   final TextEditingController searchController = TextEditingController();
   List<Items> searchList = [];
@@ -22,11 +21,11 @@ class DailyMyFoods extends ChangeNotifier {
   void getDailyMyFoods(int category) async {
     if (isActive == false) {
       searchList.clear();
+      _dailyMyFoods.clear();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String userID = prefs.getString('uid') ?? "";
       if (userID != "" && category != "") {
-        _dailyMyFoods = (await services.getFoodById(userID, category) ?? [])
-            as List<Items?>;
+        _dailyMyFoods = await services.getFoodById(userID, category) ?? [];
       }
       isActive = true;
       notifyListeners();
