@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:calori_tracker/components/radial_progress.dart';
 import '../components/drawer.dart';
 import '../components/history_alertdialog.dart';
+import '../providers/daily_my_foods.dart';
 import '../providers/theme_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -114,12 +115,16 @@ class HomePage extends StatelessWidget {
                                   )));
                     },
                     onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(1);
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return const AlertDialog(
-                              title: Text('Breakfast List'),
-                              content: SetupAlertDialoadContainer(),
+                              //title: Text('Breakfast List'),
+                              content: SetupAlertDialoadContainer(
+                                  title: "Breakfast List"),
                             );
                           });
                     },
@@ -136,7 +141,20 @@ class HomePage extends StatelessWidget {
                                     category: 2,
                                   )));
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(2);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Lunch"),
+                            );
+                          });
+                    },
                   ),
                   CategoryCard(
                     title: "Diner",
@@ -150,7 +168,20 @@ class HomePage extends StatelessWidget {
                                     category: 3,
                                   )));
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(3);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Diner"),
+                            );
+                          });
+                    },
                   ),
                   CategoryCard(
                     title: "Snacks",
@@ -164,7 +195,20 @@ class HomePage extends StatelessWidget {
                                     category: 4,
                                   )));
                     },
-                    onPressedEye: () {},
+                    onPressedEye: () {
+                      final dailyFoodProvider =
+                          Provider.of<DailyMyFoods>(context, listen: false);
+                      dailyFoodProvider.getDailyMyFoods(4);
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              //title: Text('Breakfast List'),
+                              content:
+                                  SetupAlertDialoadContainer(title: "Snacks"),
+                            );
+                          });
+                    },
                   )
                 ],
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
